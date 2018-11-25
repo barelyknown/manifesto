@@ -9,7 +9,7 @@ export default DS.Model.extend({
   },
 
   loadBody() {
-    text(`/posts/${this.slug}.md`).then((data) => {
+    text(`/assets/posts/${this.slug}.md`).then((data) => {
       this.set('body', data);
     });
   },
