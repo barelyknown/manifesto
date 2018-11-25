@@ -10,7 +10,7 @@ module.exports = function(deployTarget) {
   };
 
   ENV.gzip = {
-    filePattern: '**/*.{js,css,json,ico,xml,txt,svg,eot,ttf,woff,woff2,html}',
+    filePattern: '**/*.{js,css,json,ico,xml,txt,svg,eot,ttf,woff,woff2}',
   };
 
   if (deployTarget === 'production') {
@@ -27,7 +27,6 @@ module.exports = function(deployTarget) {
       secretAccessKey: process.env.SECRET_ACCESS_KEY,
       bucket: process.env.ASSETS_BUCKET,
       region: process.env.REGION,
-      filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,html}',
     };
 
     ENV['s3-index'] = {
@@ -36,7 +35,6 @@ module.exports = function(deployTarget) {
       bucket: process.env.INDEX_BUCKET,
       region: process.env.REGION,
       allowOverwrite: true,
-      filePattern: '_empty.html',
     };
   }
 
