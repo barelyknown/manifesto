@@ -29,7 +29,7 @@ module.exports = function(deployTarget) {
       region: process.env.REGION,
       filePattern: function(_, pluginHelper) {
         let filePattern = pluginHelper.readConfigDefault('filePattern');
-        return filePattern.replace('}', ',json}');
+        return filePattern.replace('}', ',md,json}');
       },
     };
 
