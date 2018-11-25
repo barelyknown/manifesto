@@ -14,8 +14,7 @@ export default DS.Model.extend({
   assetMap: service(),
 
   loadBodyTask: task(function * () {
-    const body = yield text(this.bodyURL);
-    this.set('body', body);
+    this.set('body', yield text(this.bodyURL));
   }),
 
   bodyURL: computed('slug', function() {
