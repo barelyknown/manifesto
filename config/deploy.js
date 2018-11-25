@@ -27,6 +27,10 @@ module.exports = function(deployTarget) {
       secretAccessKey: process.env.SECRET_ACCESS_KEY,
       bucket: process.env.ASSETS_BUCKET,
       region: process.env.REGION,
+      filePattern: function(_, pluginHelper) {
+        let filePattern = pluginHelper.readConfigDefault('filePattern');
+        return filePattern.replace('}', ',json}');
+      },
     };
 
     ENV['s3-index'] = {
