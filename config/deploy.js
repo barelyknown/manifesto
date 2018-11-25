@@ -27,6 +27,7 @@ module.exports = function(deployTarget) {
       secretAccessKey: process.env.SECRET_ACCESS_KEY,
       bucket: process.env.ASSETS_BUCKET,
       region: process.env.REGION,
+      filePattern: '**/*.{js,css,png,gif,ico,jpg,map,xml,txt,svg,swf,eot,ttf,woff,woff2,otf,html}',
     };
 
     ENV['s3-index'] = {
