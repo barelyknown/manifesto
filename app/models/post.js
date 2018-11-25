@@ -1,18 +1,26 @@
 import DS from 'ember-data';
 import attr from 'ember-data/attr';
 import { text } from 'd3-fetch';
+import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
+import { task, timeout } from 'ember-concurrency';
 
 export default DS.Model.extend({
   init() {
     this._super(...arguments);
-    this.loadBody();
+    this.loadBodyTask.perform();
   },
 
-  loadBody() {
-    text(`/assets/posts/${this.slug}.md`).then((data) => {
-      this.set('body', data);
-    });
-  },
+  assetMap: service(),
+
+  loadBodyTask: task(function * () {
+    const body = yield text(this.bodyURL);
+    this.set('body', body);
+  }),
+
+  bodyURL: computed('slug', function() {
+    return this.assetMap.resolve(`assets/posts/${this.slug}.md`);
+  }),
 
   slug: attr('string'),
 

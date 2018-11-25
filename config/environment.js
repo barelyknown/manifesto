@@ -27,6 +27,11 @@ module.exports = function(environment) {
     enabled: true,
   };
 
+  ENV.ifa = {
+    enabled: true,
+    inline: false,
+  };
+
   ENV.moment = {
     includeTimezone: 'all',
   };

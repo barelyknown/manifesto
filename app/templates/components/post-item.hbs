@@ -24,6 +24,10 @@
   </div>
 
   <div class="text-lg">
-    {{markdown-to-html markdown=@post.body}}
+    {{#if @post.loadBodyTask.isRunning}}
+      Loading...
+    {{else}}
+      {{markdown-to-html markdown=@post.body}}
+    {{/if}}
   </div>
 </div>

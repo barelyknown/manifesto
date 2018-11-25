@@ -7,7 +7,9 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: true,
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md'],
-      prepend: process.env.FINGERPRINT_PREPEND,
+      prepend: process.env.FINGERPRINT_PREPEND || '',
+      generateAssetMap: true,
+      fingerprintAssetMap: true,
     },
   });
 
