@@ -3,7 +3,7 @@ import attr from 'ember-data/attr';
 import { text } from 'd3-fetch';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
-import { task, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 
 export default DS.Model.extend({
   init() {
