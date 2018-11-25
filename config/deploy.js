@@ -10,7 +10,7 @@ module.exports = function(deployTarget) {
   };
 
   ENV.gzip = {
-    filePattern: '**/*.{js,css,json,ico,xml,txt,svg,eot,ttf,woff,woff2}',
+    filePattern: '**/*.{js,css,json,ico,xml,txt,svg,eot,ttf,woff,woff2,html}',
   };
 
   if (deployTarget === 'production') {

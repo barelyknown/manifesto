@@ -4,11 +4,16 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
-    // Add options here
     fingerprint: {
       enabled: true,
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2'],
       prepend: process.env.FINGERPRINT_PREPEND,
+    },
+    prember: {
+      urls: [
+        '/',
+        '/world',
+      ],
     },
   });
 
