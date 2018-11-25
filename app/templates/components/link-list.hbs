@@ -1,6 +1,8 @@
-<div class="text-sm font-bold">
-  {{@title}}
-</div>
+{{#if @title}}
+  <div class="text-sm font-bold">
+    {{@title}}
+  </div>
+{{/if}}
 
 {{yield
   (hash Item=(component "link-list-item" linkList=this))

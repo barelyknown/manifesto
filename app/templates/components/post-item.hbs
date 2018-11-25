@@ -4,15 +4,26 @@
       {{#link-to
         "posts.show"
         @post.slug
-        class="text-black border-b border-dashed border-grey no-underline"
+        class="text-black border-b border-dashed border-grey no-underline text-2xl"
       }}
         {{@post.title}}
       {{/link-to}}
     </div>
 
     <div class="text-xs">
-      {{moment-format post.postedAt "LLLL" timeZone=@post.timeZone}}
+      {{moment-format
+        post.postedAt
+        "LLLL"
+        timeZone=@post.timeZone
+      }}
+
+      {{#if @post.location}}
+        {{fa-icon "globe"}} {{@post.location}}
+      {{/if}}
     </div>
   </div>
-  {{markdown-to-html markdown=@post.body}}
+
+  <div class="text-lg">
+    {{markdown-to-html markdown=@post.body}}
+  </div>
 </div>
