@@ -1,13 +1,24 @@
-<div class="py-4 mb-8 text-center leading-none border-b shadow bg-white">
-  {{#link-to "application" class="text-black no-underline"}}
-    <div class="text-xs font-thin uppercase">
-      The
+<div class="flex mb-8 py-4 border-b shadow bg-white">
+  <div class="w-10 md:hidden">
+  </div>
+  <div class="flex-grow">
+    <div class="text-center leading-none">
+      {{#link-to "application" class="text-black no-underline"}}
+        <div class="text-xs font-thin uppercase">
+          The
+        </div>
+        <div class="text-xl pb-1 font-bold">
+          barelyknown
+        </div>
+        <div class="uppercase font-thin text-xs">
+          manifesto of Sean Devine
+        </div>
+      {{/link-to}}
     </div>
-    <div class="text-xl pb-1 font-bold">
-      barelyknown
-    </div>
-    <div class="uppercase font-thin text-xs">
-      manifesto of Sean Devine
-    </div>
-  {{/link-to}}
+  </div>
+  <div class="flex items-center w-10 md:hidden">
+    {{#link-to "sidebar" class="text-xl text-black"}}
+      {{fa-icon "bars"}}
+    {{/link-to}}
+  </div>
 </div>

@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('posts', function() {
     this.route('show', { path: '/:post_slug' }, function() {});
   });
+  this.route('sidebar');
 });
 
 export default Router;
