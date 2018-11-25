@@ -1,0 +1,7 @@
+.essay {
+  @apply font-normal;
+}
+
+.essay > p {
+  @apply my-2;
+}
