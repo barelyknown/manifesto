@@ -35,6 +35,7 @@ module.exports = function(deployTarget) {
       bucket: process.env.INDEX_BUCKET,
       region: process.env.REGION,
       allowOverwrite: true,
+      filePattern: '_empty.html',
     };
   }
 
