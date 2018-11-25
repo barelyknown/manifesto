@@ -1,3 +1,21 @@
 <div class="pl-4">
   <AsSeenOnList />
+
+  <LinkList @title="About the Site" as |ll|>
+    <ll.Item @href="https://emberjs.com">
+      <div class="w-4 inline-block">
+        <img src="/assets/images/ember-icon-black.svg" class="w-3 ml-1/2" />
+      </div>
+
+      Made with
+      <a href="" class="text-black no-underline border-b border-dashed border-grey">
+        Ember
+      </a>
+    </ll.Item>
+
+    <ll.Item @href="https://github.com/barelyknown/manifesto">
+      {{fa-icon "code"}}
+      Open source
+    </ll.Item>
+  </LinkList>
 </div>

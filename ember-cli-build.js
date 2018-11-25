@@ -1,11 +1,12 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const env = EmberApp.env();
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
-      enabled: true,
+      enabled: env === 'production',
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md'],
       prepend: process.env.FINGERPRINT_PREPEND || '',
       generateAssetMap: true,

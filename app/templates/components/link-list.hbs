@@ -1,9 +1,11 @@
-{{#if @title}}
-  <div class="text-sm font-bold">
-    {{@title}}
-  </div>
-{{/if}}
+<div class="mb-4">
+  {{#if @title}}
+    <div class="text-sm font-bold mb-1">
+      {{@title}}
+    </div>
+  {{/if}}
 
-{{yield
-  (hash Item=(component "link-list-item" linkList=this))
-}}
+  {{yield
+    (hash Item=(component "link-list-item" linkList=this))
+  }}
+</div>
