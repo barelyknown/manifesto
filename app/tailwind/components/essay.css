@@ -1,7 +1,3 @@
-.essay {
-  @apply font-normal;
-}
-
-.essay > p {
+.post p {
   @apply my-2;
 }

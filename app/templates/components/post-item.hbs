@@ -1,0 +1,18 @@
+<div class="post">
+  <div class="mb-4">
+    <div class="font-semibold text-lg mb-1">
+      {{#link-to
+        "posts.show"
+        @post.slug
+        class="text-black border-b border-dashed border-grey no-underline"
+      }}
+        {{@post.title}}
+      {{/link-to}}
+    </div>
+
+    <div class="text-xs">
+      {{moment-format post.postedAt "LLLL" timeZone=@post.timeZone}}
+    </div>
+  </div>
+  {{markdown-to-html markdown=@post.body}}
+</div>

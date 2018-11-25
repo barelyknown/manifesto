@@ -1,0 +1,7 @@
+<div class="text-sm font-bold">
+  {{@title}}
+</div>
+
+{{yield
+  (hash Item=(component "link-list-item" linkList=this))
+}}
