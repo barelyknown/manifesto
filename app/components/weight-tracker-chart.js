@@ -35,14 +35,14 @@ export default Component.extend({
 
   loadDataTask: task(function * () {
     console.log(this.csvURL);
-    const data = (yield csv(this.csvURL)).map((d) => {
-      return {
-        date: moment(d.date, 'M/D/YYYY').toDate(),
-        weight: parseFloat(d.weight),
-      };
-    });
-
-    this.set('data', data);
+    // const data = (yield csv(this.csvURL)).map((d) => {
+    //   return {
+    //     date: moment(d.date, 'M/D/YYYY').toDate(),
+    //     weight: parseFloat(d.weight),
+    //   };
+    // });
+    //
+    // this.set('data', data);
   }),
 
   csvURL: computed(function() {
