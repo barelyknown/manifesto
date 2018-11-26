@@ -35,7 +35,7 @@ export default Component.extend({
   assetMap: service(),
 
   loadDataTask: task(function * () {
-    const url = this.assetMap.resolve('assets/weight-measurements.csv');
+    const url = this.assetMap.resolve('assets/data/weight-measurements.csv');
     const data = (yield csv(url)).map((d) => {
       return {
         date: moment(d.date, 'M/D/YYYY').toDate(),
