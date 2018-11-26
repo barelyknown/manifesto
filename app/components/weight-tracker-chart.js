@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { task, waitForProperty } from 'ember-concurrency';
+import { task, waitForProperty, timeout } from 'ember-concurrency';
 import { csv } from 'd3-fetch';
 import { select } from 'd3-selection';
 import { axisLeft, axisBottom } from 'd3-axis';
@@ -10,6 +10,7 @@ import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import $ from 'jquery';
 import moment from 'moment';
+import { get } from '@ember/object';
 
 export default Component.extend({
   tagName: 'svg',
@@ -21,7 +22,6 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.assetMap;
     this.loadDataTask.perform();
     this.resizeService.on('debouncedDidResize', () => {
       this.drawChartTask.perform();
@@ -35,19 +35,15 @@ export default Component.extend({
   assetMap: service(),
 
   loadDataTask: task(function * () {
-    const url = this.assetMap.resolve('assets/weight-data.csv');
-    if (isPresent(url)) {
-      const data = (yield csv(url)).map((d) => {
-        return {
-          date: moment(d.date, 'M/D/YYYY').toDate(),
-          weight: parseFloat(d.weight),
-        };
-      });
-      this.set('data', data);
-    }
+    const url = this.assetMap.resolve('assets/weight-measurements.csv');
+    const data = (yield csv(url)).map((d) => {
+      return {
+        date: moment(d.date, 'M/D/YYYY').toDate(),
+        weight: parseFloat(d.weight),
+      };
+    });
+    this.set('data', data);
   }),
-
-
 
   padding: computed(function() {
     return {
