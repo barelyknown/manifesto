@@ -34,6 +34,7 @@ export default Component.extend({
   assetMap: service(),
 
   loadDataTask: task(function * () {
+    debugger;
     const url = this.assetMap.resolve('assets/weight-data.csv');
     const data = (yield csv(url)).map((d) => {
       return {
