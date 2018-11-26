@@ -4,7 +4,7 @@
   <LinkList @title="About the Site" as |ll|>
     <ll.Item @href="https://emberjs.com">
       <div class="w-4 inline-block">
-        <img src="/assets/images/ember-icon-black.svg" class="w-3 ml-1/2" />
+        <img src="/assets/images/ember-icon-black.svg" alt="ember" class="w-3 ml-1/2">
       </div>
 
       Made with
@@ -17,5 +17,12 @@
       {{fa-icon "code"}}
       Open source
     </ll.Item>
+  </LinkList>
+
+  <LinkList @title="Projects">
+    {{#link-to "weight-tracker" class="text-sm no-underline text-black border-b border-dashed border-grey"}}
+      {{fa-icon "weight"}}
+      Weight Tracker
+    {{/link-to}}
   </LinkList>
 </div>

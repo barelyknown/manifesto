@@ -1,8 +1,12 @@
 <div>
-  <a
-    href={{@href}}
-    class="text-sm no-underline text-black border-b border-dashed border-grey"
-  >
+  {{#if @href}}
+    <a
+      href={{@href}}
+      class="text-sm no-underline text-black border-b border-dashed border-grey"
+    >
+      {{yield}}
+    </a>
+  {{else}}
     {{yield}}
-  </a>
+  {{/if}}
 </div>
