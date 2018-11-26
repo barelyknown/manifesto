@@ -34,6 +34,7 @@ export default Component.extend({
   assetMap: service(),
 
   loadDataTask: task(function * () {
+    console.log(this.csvURL);
     const data = (yield csv(this.csvURL)).map((d) => {
       return {
         date: moment(d.date, 'M/D/YYYY').toDate(),
