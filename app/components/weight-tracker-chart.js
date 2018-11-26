@@ -34,8 +34,9 @@ export default Component.extend({
   assetMap: service(),
 
   loadDataTask: task(function * () {
-    yield waitForProperty(this, 'csvURL', v => isPresent(v));
-    const data = (yield csv(yield this.csvURL)).map((d) => {
+    const url = this.assetMap.resolve('assets/weight-data.csv');
+    console.log('url', url);
+    const data = (yield csv(url)).map((d) => {
       return {
         date: moment(d.date, 'M/D/YYYY').toDate(),
         weight: parseFloat(d.weight),
@@ -43,10 +44,6 @@ export default Component.extend({
     });
 
     this.set('data', data);
-  }),
-
-  csvURL: computed(function() {
-    return this.assetMap.resolve('assets/weight-data.csv');
   }),
 
   padding: computed(function() {
