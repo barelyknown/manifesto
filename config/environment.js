@@ -29,7 +29,7 @@ module.exports = function(environment) {
 
   ENV.ifa = {
     enabled: true,
-    inline: true,
+    inline: false,
   };
 
   ENV.moment = {

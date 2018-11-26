@@ -6,7 +6,7 @@ const env = EmberApp.env();
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
-      enabled: env === 'production',
+      enabled: true,
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md', 'csv'],
       prepend: process.env.FINGERPRINT_PREPEND || '',
       generateAssetMap: true,

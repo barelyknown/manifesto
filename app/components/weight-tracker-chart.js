@@ -21,6 +21,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
+    this.assetMap;
     this.loadDataTask.perform();
     this.resizeService.on('debouncedDidResize', () => {
       this.drawChartTask.perform();
@@ -34,17 +35,19 @@ export default Component.extend({
   assetMap: service(),
 
   loadDataTask: task(function * () {
-    debugger;
     const url = this.assetMap.resolve('assets/weight-data.csv');
-    const data = (yield csv(url)).map((d) => {
-      return {
-        date: moment(d.date, 'M/D/YYYY').toDate(),
-        weight: parseFloat(d.weight),
-      };
-    });
-
-    this.set('data', data);
+    if (isPresent(url)) {
+      const data = (yield csv(url)).map((d) => {
+        return {
+          date: moment(d.date, 'M/D/YYYY').toDate(),
+          weight: parseFloat(d.weight),
+        };
+      });
+      this.set('data', data);
+    }
   }),
+
+
 
   padding: computed(function() {
     return {

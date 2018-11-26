@@ -4773,10 +4773,9 @@ ember-cli-htmlbars@^3.0.0:
     json-stable-stringify "^1.0.0"
     strip-bom "^3.0.0"
 
-ember-cli-ifa@^0.7.0:
+ember-cli-ifa@RuslanZavacky/ember-cli-ifa#master:
   version "0.7.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-ifa/-/ember-cli-ifa-0.7.0.tgz#dbcfef17744d9ee10648dca5025ac55383d528f8"
-  integrity sha512-+BTJRF9EnZPFqMVlXT1cMupAlLEDfVXads92OKZNQjzv8RbFlkwpyD7cW6NswaDagsysD9NrJ5wLiHNzaqz2yg==
+  resolved "https://codeload.github.com/RuslanZavacky/ember-cli-ifa/tar.gz/e0c38a0a4c3f70671a69c265df3e8a2e08e9726b"
   dependencies:
     ember-cli-babel "^6.11.0"
 
