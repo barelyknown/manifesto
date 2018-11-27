@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { task, waitForProperty } from 'ember-concurrency';
+import { task, waitForProperty, timeout } from 'ember-concurrency';
 import { csv } from 'd3-fetch';
 import { select } from 'd3-selection';
 import { axisLeft, axisBottom } from 'd3-axis';
@@ -82,6 +82,17 @@ export default Component.extend({
     this.drawXAxis();
     this.drawWeightsSeries();
     this.drawPhotoMarkers();
+    this.playPhotosTask.linked().perform();
+  }),
+
+  playPhotosTask: task(function * () {
+    yield timeout(5000);
+    for (let i = 0; i < this.photoDates.length; i++) {
+      const date = this.photoDates[i];
+      this.showPhoto(date);
+      yield timeout(1000);
+    }
+    this.removePhoto(this.selectedPhoto);
   }),
 
   resetChart() {
@@ -124,6 +135,10 @@ export default Component.extend({
     return `weight-tracker-photo-${moment(date).format('YYYY-MM-DD')}`
   },
 
+  buildCircleId(date) {
+    return `weight-circle-${moment(date).format('YYYY-MM-DD')}`;
+  },
+
   photoPattern: /assets\/images\/weight-tracker\/(\d{4}-\d{2}-\d{2}).*\.jpg/,
 
   photos: computed(function() {
@@ -140,6 +155,7 @@ export default Component.extend({
 
   removePhoto(id) {
     this.svg.select(`#${id}`).remove();
+    this.svg.selectAll('circle').attr('fill', 'red');
     this.set('selectedPhoto', null);
   },
 
@@ -152,15 +168,19 @@ export default Component.extend({
 
     const href = this.assetMap.resolve(`assets/images/weight-tracker/${moment(date).format('YYYY-MM-DD')}.jpg`);
 
+    this.svg
+      .select(`#${this.buildCircleId(date)}`)
+      .attr('fill', 'orange');
+
     this.svg.append('image')
       .attr('width', wh)
       .attr('height', wh)
       .attr('x', () => {
         const x = this.xScale(date);
         if (x < this.width / 2.0) {
-          return x + 10;
+          return x + 50;
         } else {
-          return x - wh - 10;
+          return x - wh - 50;
         }
       })
       .attr('y', () => {
@@ -184,6 +204,7 @@ export default Component.extend({
       .data(photoDates)
       .enter()
       .append('circle')
+        .attr('id', (d) => this.buildCircleId(d))
         .attr('cx', (d) => {
           return this.xScale(d);
         })
@@ -196,6 +217,9 @@ export default Component.extend({
         .attr('stroke-width', 2)
         .attr('style', 'cursor: pointer')
         .on('click', (d) => {
+          if (this.playPhotosTask.isRunning) {
+            this.playPhotosTask.cancelAll();
+          }
           const id = this.buildPhotoId(d);
           if (id === this.selectedPhoto) {
             this.removePhoto(id);
