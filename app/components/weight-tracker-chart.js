@@ -193,7 +193,6 @@ export default Component.extend({
         .attr('stroke-width', 2)
         .attr('style', 'cursor: pointer')
         .on('click', (d) => {
-          console.log('on!');
           const id = this.buildPhotoId(d);
           if (id === this.selectedPhoto) {
             this.removePhoto(id);
