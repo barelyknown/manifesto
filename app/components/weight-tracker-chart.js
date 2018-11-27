@@ -63,7 +63,7 @@ export default Component.extend({
 
   padding: raw({
     top: 50,
-    right: 50,
+    right: 0,
     bottom: 50,
     left: 50,
   }),
@@ -98,8 +98,8 @@ export default Component.extend({
       .append('text')
       .text('Weight by Date')
       .attr('dy', '-0.25em')
-      .attr('transform', `translate(${left + innerWidth / 2},${top})`)
-      .attr('text-anchor', 'middle')
+      .attr('transform', `translate(${left},${top})`)
+      .attr('text-anchor', 'left')
       .attr('font-size', '1.25rem')
       .attr('font-weight', 'bold')
   },
@@ -125,7 +125,7 @@ export default Component.extend({
   },
 
   drawPhotoMarkers() {
-    const pattern = /assets\/images\/weight-tracker\/(\d{4}-\d{2}-\d{2})\.jpg/;
+    const pattern = /assets\/images\/weight-tracker\/(\d{4}-\d{2}-\d{2}).*\.jpg/;
     const photos = Object.keys(this.assetMap.map).filter((key) => {
       return pattern.test(key)
     });
