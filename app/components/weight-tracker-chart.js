@@ -45,15 +45,20 @@ export default Component.extend({
     this.set('data', data);
   }),
 
-  dates: array.mapBy('data', raw('date')),
+  dates: array.sort(array.mapBy('data', raw('date')), (a,b) => a < b),
 
-  weights: array.mapBy('data', raw('weight')),
+  weights: array.sort(array.mapBy('data', raw('weight'))),
 
   weightPadding: 10,
 
   weightAxis: hash({
-    min: subtract(array.first(array.sort('weights')), 'weightPadding'),
-    max: add(array.last(array.sort('weights')), 'weightPadding'),
+    min: subtract(array.first('weights'), 'weightPadding'),
+    max: add(array.last('weights'), 'weightPadding'),
+  }),
+
+  dateAxis: hash({
+    min: array.first('dates'),
+    max: array.last('dates'),
   }),
 
   padding: raw({
@@ -170,11 +175,15 @@ export default Component.extend({
       .range([height - bottom, top]);
   }),
 
-  xScale: computed('data', 'width', 'padding.{left,right}', function() {
-    const { dates, width, padding: { left, right } } = this;
+  xScale: computed('dateAxis', 'width', 'padding.{left,right}', function() {
+    const {
+      dateAxis: { min, max },
+      padding: { left, right },
+      width,
+    } = this;
 
     return scaleTime()
-      .domain([Math.min(...dates),Math.max(...dates)])
-      .range([left, width - right])
+      .domain([min, max])
+      .range([left, width - right]);
   }),
 });
