@@ -82,7 +82,7 @@ export default Component.extend({
     this.drawXAxis();
     this.drawWeightsSeries();
     this.drawPhotoMarkers();
-    this.playPhotosTask.linked().perform();
+    this.playPhotosTask.perform();
   }),
 
   playPhotosTask: task(function * () {
@@ -150,7 +150,7 @@ export default Component.extend({
   photoDates: computed('photos', function() {
     return this.photos.map((p) => {
       return moment(this.photoPattern.exec(p)[1]).toDate();
-    })
+    }).sort((a,b) => a < b ? -1 : 1);
   }),
 
   removePhoto(id) {
@@ -196,7 +196,6 @@ export default Component.extend({
   selectedPhoto: null,
 
   drawPhotoMarkers() {
-    const photos = this.photos;
     const photoDates = this.photoDates;
 
     this.svg
