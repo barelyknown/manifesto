@@ -150,6 +150,8 @@ export default Component.extend({
 
     const wh = Math.min(300, this.height * 0.8, this.width * 0.5);
 
+    const href = this.assetMap.resolve(`assets/images/weight-tracker/${moment(date).format('YYYY-MM-DD')}.jpg`);
+
     this.svg.append('image')
       .attr('width', wh)
       .attr('height', wh)
@@ -165,7 +167,8 @@ export default Component.extend({
         return (this.height - wh) * 0.5;
       })
       .attr('id', this.buildPhotoId(date))
-      .attr('href', this.assetMap.resolve(`assets/images/weight-tracker/${moment(date).format('YYYY-MM-DD')}.jpg`))
+      .attr('href', href)
+      .attr('xlink:href', href)
 
     this.set('selectedPhoto', this.buildPhotoId(date));
   },
