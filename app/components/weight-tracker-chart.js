@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { task, waitForProperty, timeout } from 'ember-concurrency';
+import { task, waitForProperty } from 'ember-concurrency';
 import { csv } from 'd3-fetch';
 import { select } from 'd3-selection';
 import { axisLeft, axisBottom } from 'd3-axis';
@@ -10,7 +10,7 @@ import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import $ from 'jquery';
 import moment from 'moment';
-import { get } from '@ember/object';
+import { array, raw, subtract, add, hash } from 'ember-awesome-macros';
 
 export default Component.extend({
   tagName: 'svg',
@@ -45,13 +45,22 @@ export default Component.extend({
     this.set('data', data);
   }),
 
-  padding: computed(function() {
-    return {
-      top: 50,
-      right: 50,
-      bottom: 50,
-      left: 50,
-    };
+  dates: array.mapBy('data', raw('date')),
+
+  weights: array.mapBy('data', raw('weight')),
+
+  weightPadding: 10,
+
+  weightAxis: hash({
+    min: subtract(array.first(array.sort('weights')), 'weightPadding'),
+    max: add(array.last(array.sort('weights')), 'weightPadding'),
+  }),
+
+  padding: raw({
+    top: 50,
+    right: 50,
+    bottom: 50,
+    left: 50,
   }),
 
   innerWidth: computed('width', 'padding.{left,right}', function() {
@@ -109,7 +118,13 @@ export default Component.extend({
   },
 
   drawXAxis() {
-    const { xScale, height, innerWidth, padding: { left, bottom } } = this;
+    const {
+      padding: { left, bottom },
+      xScale,
+      height,
+      innerWidth,
+    } = this;
+
     this.svg
       .append('g')
       .attr('transform', `translate(0,${height - bottom})`)
@@ -130,6 +145,7 @@ export default Component.extend({
 
   drawWeightsSeries() {
     const { data, xScale, yScale } = this;
+
     this.svg
       .append('path')
       .attr('fill', 'none')
@@ -143,17 +159,19 @@ export default Component.extend({
   },
 
   yScale: computed('height', 'padding.{top,bottom}', function() {
-    const { height, padding: { top, bottom } } = this;
+    const {
+      weightAxis: { min, max },
+      padding: { top, bottom },
+      height,
+    } = this;
 
     return scaleLinear()
-      .domain([145, 195])
+      .domain([min, max])
       .range([height - bottom, top]);
   }),
 
   xScale: computed('data', 'width', 'padding.{left,right}', function() {
-    const { data, width, padding: { left, right } } = this;
-
-    const dates = data.map(w => w.date);
+    const { dates, width, padding: { left, right } } = this;
 
     return scaleTime()
       .domain([Math.min(...dates),Math.max(...dates)])
