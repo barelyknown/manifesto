@@ -81,6 +81,7 @@ export default Component.extend({
     this.drawYAxis();
     this.drawXAxis();
     this.drawWeightsSeries();
+    this.drawPhotoMarkers();
   }),
 
   resetChart() {
@@ -101,6 +102,76 @@ export default Component.extend({
       .attr('text-anchor', 'middle')
       .attr('font-size', '1.25rem')
       .attr('font-weight', 'bold')
+  },
+
+  findWeight(date) {
+    const { data } = this;
+    let cb, ca;
+    for (let i = 0; i < data.length; i++) {
+      const datum = data[i];
+      if (datum.date <= date) {
+        cb = datum.weight;
+      } else {
+        ca = datum.weight;
+        break;
+      }
+    }
+    if (!ca) ca = cb;
+    return (cb + ca) / 2.0;
+  },
+
+  buildPhotoId(date) {
+    return `weight-tracker-photo-${moment(date).format('YYYY-MM-DD')}`
+  },
+
+  drawPhotoMarkers() {
+    const pattern = /assets\/images\/weight-tracker\/(\d{4}-\d{2}-\d{2})\.jpg/;
+    const photos = Object.keys(this.assetMap.map).filter((key) => {
+      return pattern.test(key)
+    });
+    const photoDates = photos.map((p) => {
+      return moment(pattern.exec(p)[1]).toDate();
+    });
+
+    this.svg
+      .selectAll('marker')
+      .data(photoDates)
+      .enter()
+      .append('circle')
+        .attr('cx', (d) => {
+          return this.xScale(d);
+        })
+        .attr('cy', (d) => {
+          return this.yScale(this.findWeight(d));
+        })
+        .attr('r', 5)
+        .attr('fill', 'red')
+        .attr('stroke', 'black')
+        .attr('stroke-width', 2)
+        .on('mouseover', (d, i) => {
+          const wh = Math.min(300, this.height * 0.8, this.width * 0.5);
+          this.svg.append('image')
+            .attr('width', wh)
+            .attr('height', wh)
+            .attr('x', () => {
+              const x = this.xScale(d);
+              if (x < this.width / 2.0) {
+                return x + 10;
+              } else {
+                return x - wh - 10;
+              }
+            })
+            .attr('y', () => {
+              return (this.height - wh) * 0.5;
+            })
+            .attr('id', this.buildPhotoId(d))
+            .attr('href', this.assetMap.resolve(photos[i]))
+        })
+        .on('mouseout', (d) => {
+          this.svg
+            .select(`image#${this.buildPhotoId(d)}`)
+            .remove();
+        })
   },
 
   drawYAxis() {
