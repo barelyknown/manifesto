@@ -45,7 +45,7 @@ export default Component.extend({
     this.set('data', data);
   }),
 
-  dates: array.sort(array.mapBy('data', raw('date')), (a,b) => a < b),
+  dates: array.sort(array.mapBy('data', raw('date')), (a,b) => a < b ? -1 : 1),
 
   weights: array.sort(array.mapBy('data', raw('weight'))),
 
@@ -124,14 +124,57 @@ export default Component.extend({
     return `weight-tracker-photo-${moment(date).format('YYYY-MM-DD')}`
   },
 
+  photoPattern: /assets\/images\/weight-tracker\/(\d{4}-\d{2}-\d{2}).*\.jpg/,
+
+  photos: computed(function() {
+    return Object.keys(this.assetMap.map).filter((key) => {
+      return this.photoPattern.test(key)
+    });
+  }),
+
+  photoDates: computed('photos', function() {
+    return this.photos.map((p) => {
+      return moment(this.photoPattern.exec(p)[1]).toDate();
+    })
+  }),
+
+  removePhoto(id) {
+    this.svg.select(`#${id}`).remove();
+    this.set('selectedPhoto', null);
+  },
+
+  showPhoto(date) {
+    if (this.selectedPhoto) {
+      this.removePhoto(this.selectedPhoto);
+    }
+
+    const wh = Math.min(300, this.height * 0.8, this.width * 0.5);
+
+    this.svg.append('image')
+      .attr('width', wh)
+      .attr('height', wh)
+      .attr('x', () => {
+        const x = this.xScale(date);
+        if (x < this.width / 2.0) {
+          return x + 10;
+        } else {
+          return x - wh - 10;
+        }
+      })
+      .attr('y', () => {
+        return (this.height - wh) * 0.5;
+      })
+      .attr('id', this.buildPhotoId(date))
+      .attr('href', this.assetMap.resolve(`assets/images/weight-tracker/${moment(date).format('YYYY-MM-DD')}.jpg`))
+
+    this.set('selectedPhoto', this.buildPhotoId(date));
+  },
+
+  selectedPhoto: null,
+
   drawPhotoMarkers() {
-    const pattern = /assets\/images\/weight-tracker\/(\d{4}-\d{2}-\d{2}).*\.jpg/;
-    const photos = Object.keys(this.assetMap.map).filter((key) => {
-      return pattern.test(key)
-    });
-    const photoDates = photos.map((p) => {
-      return moment(pattern.exec(p)[1]).toDate();
-    });
+    const photos = this.photos;
+    const photoDates = this.photoDates;
 
     this.svg
       .selectAll('marker')
@@ -148,29 +191,13 @@ export default Component.extend({
         .attr('fill', 'red')
         .attr('stroke', 'black')
         .attr('stroke-width', 2)
-        .on('mouseover', (d, i) => {
-          const wh = Math.min(300, this.height * 0.8, this.width * 0.5);
-          this.svg.append('image')
-            .attr('width', wh)
-            .attr('height', wh)
-            .attr('x', () => {
-              const x = this.xScale(d);
-              if (x < this.width / 2.0) {
-                return x + 10;
-              } else {
-                return x - wh - 10;
-              }
-            })
-            .attr('y', () => {
-              return (this.height - wh) * 0.5;
-            })
-            .attr('id', this.buildPhotoId(d))
-            .attr('href', this.assetMap.resolve(photos[i]))
-        })
-        .on('mouseout', (d) => {
-          this.svg
-            .select(`image#${this.buildPhotoId(d)}`)
-            .remove();
+        .on('click', (d) => {
+          const id = this.buildPhotoId(d);
+          if (id === this.selectedPhoto) {
+            this.removePhoto(id);
+          } else {
+            this.showPhoto(d);
+          }
         })
   },
 
