@@ -10,7 +10,7 @@ module.exports = function(defaults) {
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md', 'csv', 'json'],
       prepend: process.env.FINGERPRINT_PREPEND || '',
       generateAssetMap: true,
-      fingerprintAssetMap: false,
+      fingerprintAssetMap: true,
     },
   });
 
