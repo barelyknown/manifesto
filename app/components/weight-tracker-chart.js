@@ -10,7 +10,17 @@ import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 import $ from 'jquery';
 import moment from 'moment';
-import { array, raw, subtract, add, hash } from 'ember-awesome-macros';
+import textSizes from 'manifesto/tailwind/config/text-sizes';
+
+import {
+  array,
+  raw,
+  subtract,
+  add,
+  hash,
+  math,
+  multiply
+} from 'ember-awesome-macros';
 
 export default Component.extend({
   tagName: 'svg',
@@ -62,10 +72,10 @@ export default Component.extend({
   }),
 
   padding: raw({
-    top: 50,
-    right: 0,
-    bottom: 50,
-    left: 50,
+    top: 20,
+    right: 25,
+    bottom: 20,
+    left: 40,
   }),
 
   innerWidth: computed('width', 'padding.{left,right}', function() {
@@ -77,42 +87,30 @@ export default Component.extend({
     yield waitForProperty(this, 'data', v => isPresent(v));
     this.set('svg', select(this.element));
     this.resetChart();
-    this.drawTitle();
     this.drawYAxis();
     this.drawXAxis();
     this.drawWeightsSeries();
     this.drawPhotoMarkers();
+    this.loadPhotos();
     this.playPhotosTask.perform();
   }),
 
   playPhotosTask: task(function * () {
-    yield timeout(5000);
+    yield timeout(1000);
     for (let i = 0; i < this.photoDates.length; i++) {
       const date = this.photoDates[i];
       this.showPhoto(date);
       yield timeout(1000);
     }
     this.removePhoto(this.selectedPhoto);
-  }),
+  }).restartable(),
 
   resetChart() {
     this.svg.selectAll("*").remove();
     this.setProperties({
-      height: $(this.element).height(),
+      height: $(this.element).width() / 2,
       width: $(this.element).width(),
     });
-  },
-
-  drawTitle() {
-    const { innerWidth, padding: { left, top } } = this;
-    this.svg
-      .append('text')
-      .text('Weight by Date')
-      .attr('dy', '-0.25em')
-      .attr('transform', `translate(${left},${top})`)
-      .attr('text-anchor', 'left')
-      .attr('font-size', '1.25rem')
-      .attr('font-weight', 'bold')
   },
 
   findWeight(date) {
@@ -139,6 +137,10 @@ export default Component.extend({
     return `weight-circle-${moment(date).format('YYYY-MM-DD')}`;
   },
 
+  buildCircleLabelId(date) {
+    return `weight-circle-label-${moment(date).format('YYYY-MM-DD')}`;
+  },
+
   photoPattern: /assets\/images\/weight-tracker\/(\d{4}-\d{2}-\d{2}).*\.jpg/,
 
   photos: computed(function() {
@@ -153,8 +155,60 @@ export default Component.extend({
     }).sort((a,b) => a < b ? -1 : 1);
   }),
 
-  removePhoto(id) {
-    this.svg.select(`#${id}`).remove();
+  wh: math.min(raw(300), multiply('height', raw(0.5))),
+
+  loadPhotos() {
+    const { wh, svg, photoDates } = this;
+
+    svg.append('defs')
+      .append('clipPath')
+        .attr('id', 'face-clip')
+        .append('circle')
+          .attr('cx', wh / 2.0)
+          .attr('cy', wh / 2.0)
+          .attr('r', wh / 2.0);
+
+    for (let i = 0; i < photoDates.length; i++) {
+      const d = photoDates[i];
+      this.loadPhoto(d);
+    }
+  },
+
+  findPhotoX(date) {
+    const { xScale, width, wh } = this;
+    const x = xScale(date);
+    if (x < width / 2.0) {
+      return x + 50;
+    } else {
+      return x - (wh + 50);
+    }
+  },
+
+  findPhotoY() {
+    return (this.height - this.wh) * 0.5;
+  },
+
+  loadPhoto(date) {
+    const { wh, assetMap } = this;
+
+    const href = assetMap.resolve(`assets/images/weight-tracker/${moment(date).format('YYYY-MM-DD')}.jpg`);
+
+    this.svg.append('image')
+      .classed('hidden', true)
+      .attr('width', wh)
+      .attr('height', wh)
+      .attr('x', 0)
+      .attr('y', 0)
+      .attr('clip-path', 'url(#face-clip)')
+      .attr('transform', () => `translate(${this.findPhotoX(date)},${this.findPhotoY()})`)
+      .attr('id', this.buildPhotoId(date))
+      .attr('href', href)
+      .attr('xlink:href', href);
+  },
+
+  removePhoto(date) {
+    this.svg.select(`#${this.buildPhotoId(date)}`).classed('hidden', true);
+    this.svg.select(`#${this.buildCircleLabelId(date)}`).classed('hidden', true);
     this.svg.selectAll('circle').attr('fill', 'red');
     this.set('selectedPhoto', null);
   },
@@ -164,33 +218,19 @@ export default Component.extend({
       this.removePhoto(this.selectedPhoto);
     }
 
-    const wh = Math.min(300, this.height * 0.8, this.width * 0.5);
-
-    const href = this.assetMap.resolve(`assets/images/weight-tracker/${moment(date).format('YYYY-MM-DD')}.jpg`);
-
     this.svg
       .select(`#${this.buildCircleId(date)}`)
       .attr('fill', 'orange');
 
-    this.svg.append('image')
-      .attr('width', wh)
-      .attr('height', wh)
-      .attr('x', () => {
-        const x = this.xScale(date);
-        if (x < this.width / 2.0) {
-          return x + 50;
-        } else {
-          return x - wh - 50;
-        }
-      })
-      .attr('y', () => {
-        return (this.height - wh) * 0.5;
-      })
-      .attr('id', this.buildPhotoId(date))
-      .attr('href', href)
-      .attr('xlink:href', href)
+    this.svg
+      .select(`#${this.buildPhotoId(date)}`)
+      .classed('hidden', false);
 
-    this.set('selectedPhoto', this.buildPhotoId(date));
+    this.svg
+      .select(`#${this.buildCircleLabelId(date)}`)
+      .classed('hidden', false);
+
+    this.set('selectedPhoto', date);
   },
 
   selectedPhoto: null,
@@ -219,58 +259,58 @@ export default Component.extend({
           if (this.playPhotosTask.isRunning) {
             this.playPhotosTask.cancelAll();
           }
-          const id = this.buildPhotoId(d);
-          if (id === this.selectedPhoto) {
-            this.removePhoto(id);
+          if (d === this.selectedPhoto) {
+            this.removePhoto(d);
           } else {
             this.showPhoto(d);
           }
-        })
+        });
+
+    this.svg
+      .selectAll('text.weight-circle-label')
+      .data(photoDates)
+      .enter()
+      .append('text')
+        .classed('weight-circle-label', true)
+        .classed('hidden', true)
+        .attr('id', d => this.buildCircleLabelId(d))
+        .text(d => parseInt(this.findWeight(d)))
+        .attr('x', d => this.findPhotoX(d) + (this.wh / 2.0))
+        .attr('y', () => this.findPhotoY() - 10)
+        .attr('font-weight', '100')
+        .attr('font-size', textSizes['3xl'])
+        .style("text-anchor", "middle")
   },
 
   drawYAxis() {
-    const { yScale, height, padding: { left, bottom } } = this;
+    const { yScale, padding: { left } } = this;
     this.svg
       .append('g')
       .attr('transform', `translate(${left},0)`)
       .call(axisLeft(yScale));
-
-    this.svg
-      .append('text')
-      .text('First Morning Weight (lbs)')
-      .attr('alignment-baseline', 'hanging')
-      .attr('transform', ()=> {
-        return [
-          `translate(0,${height - bottom})`,
-          'rotate(-90)'
-        ].join(' ');
-      });
   },
 
   drawXAxis() {
     const {
-      padding: { left, bottom },
+      padding: { bottom },
       xScale,
       height,
-      innerWidth,
     } = this;
 
     this.svg
       .append('g')
       .attr('transform', `translate(0,${height - bottom})`)
-      .call(axisBottom(xScale))
-      .selectAll("text")
-        .style("text-anchor", "end")
-        .attr("dx", "0.5em")
-        .attr("transform", () => "rotate(-45)");
-
-    this.svg
-      .append('text')
-      .attr('x', left + innerWidth / 2)
-      .attr('y', height)
-      .attr('text-anchor', 'middle')
-      .attr('font-size', '1rem')
-      .text('Date')
+      .call(
+        axisBottom(xScale)
+          .tickFormat((d) => {
+            if (d.getMonth() === 0) {
+              return moment(d).format('YY');
+            } else {
+              return moment(d).format('MMM')[0];
+            }
+          })
+      ).selectAll("text")
+        .style("text-anchor", "middle");
   },
 
   drawWeightsSeries() {
