@@ -1606,6 +1606,21 @@ aws-sdk@^2.1.48, aws-sdk@^2.6.12:
     uuid "3.1.0"
     xml2js "0.4.19"
 
+aws-sdk@^2.252.1:
+  version "2.366.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.366.0.tgz#3f2ead3b4efa4537286c6fa14995418ed9d65cbe"
+  integrity sha512-5Nbz2F5uoDl8bNuRoSsZ0Q2Cmzyktmbr4SUq4k1y3S3P9RSCqD9LBR9uzGJKnAdq3Jr0LC/VcL4C4NoOzQPM8A==
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.1.0"
+    xml2js "0.4.19"
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -4649,6 +4664,17 @@ ember-cli-deploy-build@^1.1.1:
     glob "^7.1.1"
     rsvp "^3.5.0"
 
+ember-cli-deploy-cloudfront@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-deploy-cloudfront/-/ember-cli-deploy-cloudfront-1.3.0.tgz#e8921fc05d765175c61b2bfc70084a4cef870c87"
+  integrity sha512-zHCcnDvaRRVKkZgFn1teXXMyn7/gKGdHPo/qGDjtuXygIcB8bK+hbi2gjX8P0Bc4d/U4l8SaQJuKThLi43ehmg==
+  dependencies:
+    aws-sdk "^2.252.1"
+    core-object "^3.1.5"
+    ember-cli-deploy-plugin "~0.2.9"
+    rsvp "^4.8.2"
+    uuid "^3.2.1"
+
 ember-cli-deploy-gzip@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-gzip/-/ember-cli-deploy-gzip-1.0.1.tgz#aab2e5ffb1eb120e264d2e50d7583691fe207c54"
@@ -4660,7 +4686,7 @@ ember-cli-deploy-gzip@^1.0.1:
     minimatch "^3.0.3"
     rsvp "^3.5.0"
 
-ember-cli-deploy-plugin@^0.2.1, ember-cli-deploy-plugin@^0.2.2, ember-cli-deploy-plugin@^0.2.6, ember-cli-deploy-plugin@^0.2.9:
+ember-cli-deploy-plugin@^0.2.1, ember-cli-deploy-plugin@^0.2.2, ember-cli-deploy-plugin@^0.2.6, ember-cli-deploy-plugin@^0.2.9, ember-cli-deploy-plugin@~0.2.9:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-plugin/-/ember-cli-deploy-plugin-0.2.9.tgz#a3d395b8adad7ef68d8bacdd0b0f4a61bcf9e651"
   integrity sha1-o9OVuK2tfvaNi6zdCw9KYbz55lE=
@@ -12829,7 +12855,7 @@ uuid@3.1.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
   integrity sha512-DIWtzUkw04M4k3bf1IcpS2tngXEL26YUD2M0tMDUpnUrz2hgzUBlD55a4FjdLGPvfHxS6uluGWvaVEqgBcVa+g==
 
-uuid@^3.3.2:
+uuid@^3.2.1, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
