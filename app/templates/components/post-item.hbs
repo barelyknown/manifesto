@@ -11,10 +11,10 @@
         {{/link-to}}
       </div>
 
-      <div class="text-xs">
+      <div class="text-xs mt-2">
         {{moment-format
           this.post.postedAt
-          "LLLL"
+          this.post.timeFormat
           timeZone=this.post.timeZone
         }}
 

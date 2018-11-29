@@ -1,3 +1,15 @@
 .post p {
-  @apply my-3;
+  @apply mt-4;
+}
+
+.post {
+  @apply mb-12;
+}
+
+.post p a {
+  @apply no-underline text-black border-b border-dashed;
+}
+
+.post hr {
+  @apply border-b border-grey my-6;
 }
