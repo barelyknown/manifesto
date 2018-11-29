@@ -7,9 +7,13 @@
 }
 
 .post p a {
-  @apply no-underline text-black border-b border-dashed;
+  @apply no-underline text-black border-b border-dashed border-grey;
 }
 
 .post hr {
   @apply border-b border-grey my-6;
+}
+
+.post {
+  @apply leading-normal;
 }

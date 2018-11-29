@@ -1,4 +1,4 @@
-Inspired by Letters From a Self-Made Merchant to His Son, I started writing letters to my 20-year old daughter. This is the first.
+Inspired by [Letters From a Self-Made Merchant to His Son](https://www.amazon.com/Letters-Self-Made-Merchant-his-Illustrated-ebook/dp/B00O5D6WIC), I started writing letters to my 20-year old daughter. This is the first.
 
 * * *
 
