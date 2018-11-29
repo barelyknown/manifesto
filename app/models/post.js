@@ -19,7 +19,6 @@ export default DS.Model.extend({
   }),
 
   bodyURL: computed('slug', function () {
-    console.log(this.assetMap.resolve(`assets/posts/${this.slug}.md`));
     return this.assetMap.resolve(`assets/posts/${this.slug}.md`);
   }),
 
