@@ -141,6 +141,10 @@ export default Component.extend({
     return `weight-circle-label-${moment(date).format('YYYY-MM-DD')}`;
   },
 
+  buildCircleDateLabelId(date) {
+    return `weight-circle-date-label-${moment(date).format('YYYY-MM-DD')}`;
+  },
+
   photoPattern: /assets\/images\/weight-tracker\/(\d{4}-\d{2}-\d{2}).*\.jpg/,
 
   photos: computed(function() {
@@ -209,6 +213,7 @@ export default Component.extend({
   removePhoto(date) {
     this.svg.select(`#${this.buildPhotoId(date)}`).classed('hidden', true);
     this.svg.select(`#${this.buildCircleLabelId(date)}`).classed('hidden', true);
+    this.svg.select(`#${this.buildCircleDateLabelId(date)}`).classed('hidden', true);
     this.svg.selectAll('circle').attr('fill', 'red');
     this.set('selectedPhoto', null);
   },
@@ -228,6 +233,10 @@ export default Component.extend({
 
     this.svg
       .select(`#${this.buildCircleLabelId(date)}`)
+      .classed('hidden', false);
+
+    this.svg
+      .select(`#${this.buildCircleDateLabelId(date)}`)
       .classed('hidden', false);
 
     this.set('selectedPhoto', date);
@@ -279,7 +288,22 @@ export default Component.extend({
         .attr('y', () => this.findPhotoY() - 10)
         .attr('font-weight', '100')
         .attr('font-size', textSizes['3xl'])
-        .style("text-anchor", "middle")
+        .style('text-anchor', 'middle');
+
+    this.svg
+      .selectAll('text.weight-circle-date-label')
+      .data(photoDates)
+      .enter()
+        .append('text')
+          .classed('weight-circle-date-label', true)
+          .classed('hidden', true)
+          .attr('id', d => this.buildCircleDateLabelId(d))
+          .text(d => moment(d).format('YYYY-MM-DD'))
+          .attr('x', d => this.findPhotoX(d) + (this.wh / 2.0))
+          .attr('y', () => this.findPhotoY() + 20 + this.wh)
+          .attr('font-weight', '300')
+          .attr('font-size', textSizes['base'])
+          .style('text-anchor', 'middle');
   },
 
   drawYAxis() {
