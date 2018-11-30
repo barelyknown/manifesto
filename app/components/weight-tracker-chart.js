@@ -26,8 +26,7 @@ export default Component.extend({
   tagName: 'svg',
 
   classNames: [
-    'w-full',
-    'h-screen-1/2',
+    'w-full'
   ],
 
   init() {
@@ -72,9 +71,9 @@ export default Component.extend({
   }),
 
   padding: raw({
-    top: 20,
+    top: 25,
     right: 25,
-    bottom: 20,
+    bottom: 25,
     left: 40,
   }),
 
@@ -111,6 +110,10 @@ export default Component.extend({
       height: $(this.element).width() / 2,
       width: $(this.element).width(),
     });
+
+    this.svg
+      .attr('viewbox', `0 0 ${this.height} ${this.width}`)
+      .attr('height', this.height);
   },
 
   findWeight(date) {
@@ -352,7 +355,7 @@ export default Component.extend({
       );
   },
 
-  yScale: computed('height', 'padding.{top,bottom}', function() {
+  yScale: computed('weightAxis.{min,max}', 'height', 'padding.{top,bottom}', function() {
     const {
       weightAxis: { min, max },
       padding: { top, bottom },

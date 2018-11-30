@@ -1,0 +1,65 @@
+<div class="post">
+  <div class="mb-4">
+    <div class="font-semibold text-lg mb-1">
+      Weight vs. Face
+    </div>
+  </div>
+
+  <p>
+    I started to track my weight daily on July 4, 2017 after deciding to drop down to 160 lbs for my 40th birthday. I overshot the goal by 6 lbs in November, and then settled around 160 lbs for the next year with a bit of fluxuation.
+  </p>
+
+  <p>
+    <i>Somewhat unexpectedly, I lost the final 15 pounds from my face.</i>
+  </p>
+
+  <p>
+    To demonstrate how true this was to Theresa (my wife), I went back through our photos and matched them to dates and weights:
+  </p>
+
+  <WeightTrackerChart />
+
+  <p>
+    After reviewing the chart, the family consensus seems to be:
+  </p>
+
+  <ol>
+    <li>
+      The shorter the hair, the better. It's a bad idea to voluntarily add volume to my head.
+    </li>
+    <li>
+      Don't have the barber "line up" my forehead hairline, even if it looks good on everyone else.
+    </li>
+    <li>
+      Wearing sunglasses that depend on my nose for their angle makes it clear that my nose isn't just big, it's crooked.
+    </li>
+    <li>
+      The ideal face weight appears to be somewhere between 157 and 160, and things get weird at 155.
+    </li>
+    <li>
+      Don't ever shave the beard.
+    </li>
+    <li>
+      It may be possible to make AirPods look good in a photo, but not by me.
+    </li>
+    <li>
+      I don't represent the views of all family members.
+    </li>
+  </ol>
+
+  <p>
+    <b>About the technical implementation:</b>
+  </p>
+
+  <p>
+    The chart is an SVG generated with the help of <a href="https://d3js.org">d3</a>. The code that writes the chart is pretty straight forward, and probably a good introduction to various basic d3 and SVG concepts. It's <a href="https://github.com/barelyknown/manifesto/blob/master/app/components/weight-tracker-chart.js">available on GitHub.</a>
+  </p>
+
+  <p>
+    The photos are simply named by date and stored on S3. The component looks at the "folder" via the ember-cli generated asset map to see what photos are available. It would be fun to experiment with other implementations (especially that put more logic in component templates).
+  </p>
+
+  <p>
+    Fun detail... You can click on any red circle to show the photo from that date.
+  </p>
+</div>
