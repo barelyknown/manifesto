@@ -2,6 +2,14 @@ import moment from 'moment';
 
 export default [
   {
+    slug: 'manifort-alchemy',
+    isPublished: false,
+    title: 'Manifort Alchemy',
+    postedAt: moment.tz([2018,11,1,17], 'America/Chicago').clone().tz('UTC').format(),
+    location: 'Chicago, IL',
+    timeZone: 'America/Chicago',
+  },
+  {
     slug: 'manifesto-destiny',
     isPublished: true,
     title: 'Manifesto Destiny',
