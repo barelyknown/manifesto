@@ -66,6 +66,7 @@
     "ember-qunit": "^3.4.1",
     "ember-resize": "^0.3.0",
     "ember-resolver": "^5.0.1",
+    "ember-router-scroll": "^1.0.1",
     "ember-source": "~3.5.0",
     "eslint-plugin-ember": "^5.2.0",
     "loader.js": "^4.7.0",
