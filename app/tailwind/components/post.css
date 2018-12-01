@@ -1,12 +1,16 @@
-.post p {
+.post {
+  @apply mb-12 leading-normal;
+}
+
+.post p, .post ol {
   @apply mt-4;
 }
 
-.post {
-  @apply mb-12;
+.post p a {
+  @apply no-underline text-black border-b border-dashed border-grey;
 }
 
-.post p a {
+.post h1 a {
   @apply no-underline text-black border-b border-dashed border-grey;
 }
 
@@ -14,6 +18,10 @@
   @apply border-b border-grey my-6;
 }
 
-.post {
-  @apply leading-normal;
+.post h1 {
+  @apply text-2xl;
+}
+
+.post h2 {
+  @apply text-xl font-bold mt-4;
 }

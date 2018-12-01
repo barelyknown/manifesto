@@ -1,15 +1,15 @@
 <div class="post">
   {{#if this.post}}
     <div class="mb-4">
-      <div class="font-semibold text-lg mb-1">
+      <h1>
         {{#link-to
           "posts.show"
           this.post.slug
-          class="text-black border-b border-dashed border-grey no-underline text-2xl"
+          class="no-underline text-black border-b border-dashed border-grey"
         }}
           {{this.post.title}}
         {{/link-to}}
-      </div>
+      </h1>
 
       <div class="text-xs">
         {{moment-format
