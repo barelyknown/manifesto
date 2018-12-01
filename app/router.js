@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('show', { path: '/:post_slug' }, function() {});
   });
   this.route('sidebar');
+  this.route('weight-tracker');
   this.route('weight-vs-face');
 });
 
