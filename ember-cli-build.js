@@ -8,10 +8,20 @@ module.exports = function(defaults) {
     fingerprint: {
       enabled: true,
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md', 'csv', 'json'],
+      exclude: ['package.json'],
       prepend: process.env.FINGERPRINT_PREPEND || '',
       generateAssetMap: true,
       fingerprintAssetMap: true,
     },
+    prember: {
+      urls: [
+        '/',
+        '/manifesto-destiny',
+      ],
+    },
+    'ember-fetch': {
+      preferNative: true
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated

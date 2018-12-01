@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import attr from 'ember-data/attr';
-import { text } from 'd3-fetch';
+import d3Fetch from 'd3-fetch';
 import { inject as service } from '@ember/service';
 import { computed } from 'ember-awesome-macros';
 import { task } from 'ember-concurrency';
@@ -15,7 +15,8 @@ export default DS.Model.extend({
   assetMap: service(),
 
   loadBodyTask: task(function * () {
-    this.set('body', yield text(this.bodyURL));
+    console.log('text', yield d3Fetch.text('foo'));
+    // this.set('body', yield text(this.bodyURL));
   }),
 
   bodyURL: computed('slug', function () {

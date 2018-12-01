@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { task } from 'ember-concurrency';
 
 export default Component.extend({
   tagName: '',
@@ -7,13 +8,19 @@ export default Component.extend({
   init() {
     this._super(...arguments);
 
-    this.loadPosts();
+    const postLoading = this.loadPostsTask.perform();
+    if (this.fastboot.isFastBoot) {
+      this.fastboot.deferRendering(postLoading);
+    }
   },
 
   store: service(),
 
-  loadPosts() {
-    const posts = this.store.findAll('post');
+  fastboot: service(),
+
+  loadPostsTask: task(function * () {
+    const posts = yield this.store.peekAll('post');
+    // const posts = [];
     this.set('posts', posts);
-  }
+  }),
 });
