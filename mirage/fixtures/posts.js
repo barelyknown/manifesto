@@ -17,4 +17,12 @@ export default [
     location: 'Simsbury, CT',
     timeZone: 'America/New_York',
   },
+  {
+    slug: 'the-app-store-first-comes-power',
+    isPublished: true,
+    title: 'The App Store: First Comes Power',
+    postedAt: moment.tz([2009,0,3], 'America/New_York').clone().tz('UTC').format(),
+    location: 'Ann Arbor, MI',
+    timeZone: 'America/New_York',
+  }
 ];
