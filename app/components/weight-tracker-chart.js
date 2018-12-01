@@ -95,7 +95,7 @@ export default Component.extend({
   }),
 
   playPhotosTask: task(function * () {
-    yield timeout(1000);
+    yield timeout(3000);
     for (let i = 0; i < this.photoDates.length; i++) {
       const date = this.photoDates[i];
       this.showPhoto(date);
