@@ -9,6 +9,7 @@ module.exports = function(defaults) {
       enabled: env === 'production',
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md', 'csv', 'json'],
       prepend: process.env.FINGERPRINT_PREPEND || '',
+      exclude: ['assets/images/posts/**/*.*'],
       generateAssetMap: true,
       fingerprintAssetMap: true,
     },

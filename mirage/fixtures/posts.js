@@ -2,6 +2,14 @@ import moment from 'moment';
 
 export default [
   {
+    slug: 'india-travelogue-2018-dispath-1',
+    isPublished: true,
+    title: 'India Travelogue: Dispatch 1',
+    postedAt: moment.tz([2018,11,13,9], 'Asia/Kolkata').clone().tz('UTC').format(),
+    location: 'Goa, India',
+    timeZone: 'Asia/Kolkata',
+  },
+  {
     slug: 'manifort-alchemy',
     isPublished: false,
     title: 'Manifort Alchemy',
