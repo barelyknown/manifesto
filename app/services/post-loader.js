@@ -7,19 +7,16 @@ import ENV from 'manifesto/config/environment';
 export default Service.extend({
   store: service(),
 
-  assetMap: service(),
-
   isLoaded: false,
 
   loadAllTask: task(function * () {
     const {
       isLoaded,
       store,
-      assetMap
     } = this;
 
     if (!isLoaded) {
-      const data = yield json('assets/posts/data.json');
+      const data = yield json('/assets/posts/data.json');
       for (var d = 0; d < data.length; d++) {
         if (ENV.environment !== 'production' || data[d].isPublished) {
           const doc = {

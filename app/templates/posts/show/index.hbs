@@ -1,6 +1,8 @@
 <div class="flex">
   <div class="md:w-3/4">
-    <PostItem @slug={{this.model}} />
+    <LoadPost @slug={{this.model}} as |post|>
+      <PostItem @post={{post}} />
+    </LoadPost>
   </div>
 
   <div class="hidden md:block md:w-1/4">
