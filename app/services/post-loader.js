@@ -19,8 +19,7 @@ export default Service.extend({
     } = this;
 
     if (!isLoaded) {
-      const url = assetMap.resolve("assets/posts/data.json");
-      const data = yield json(url);
+      const data = yield json('assets/posts/data.json');
       for (var d = 0; d < data.length; d++) {
         if (ENV.environment !== 'production' || data[d].isPublished) {
           const doc = {
