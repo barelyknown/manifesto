@@ -23,10 +23,6 @@ module.exports = function(environment) {
     }
   };
 
-  ENV['ember-cli-mirage'] = {
-    enabled: true,
-  };
-
   ENV.ifa = {
     enabled: true,
     inline: false,

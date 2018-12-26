@@ -12,10 +12,12 @@ export default Component.extend({
     }
   },
 
+  postLoader: service(),
+
   store: service(),
 
   loadPostTask: task(function * (slug) {
-    const posts = yield this.store.findAll('post');
+    const posts = yield this.postLoader.loadAll();
     const post = posts.find((post) => {
       return post.slug === slug;
     });

@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "india-travelogue-2018-dispath-1",
+    "isPublished": true,
+    "title": "India Travelogue: Dispatch 1",
+    "postedAt": "2018-12-13T03:30:00.000Z",
+    "location": "Goa, India",
+    "timeZone": "Asia/Kolkata"
+  },
+  {
+    "slug": "manifort-alchemy",
+    "isPublished": false,
+    "title": "Manifort Alchemy",
+    "postedAt": "2018-12-01T23:00:00.000Z",
+    "location": "Chicago, IL",
+    "timeZone": "America/Chicago"
+  },
+  {
+    "slug": "manifesto-destiny",
+    "isPublished": true,
+    "title": "Manifesto Destiny",
+    "postedAt": "2018-11-25T18:00:00.000Z",
+    "location": "Chicago, IL",
+    "timeZone": "America/Chicago"
+  },
+  {
+    "slug": "visions-and-verbs",
+    "isPublished": true,
+    "title": "Visions and Verbs",
+    "postedAt": "2017-01-02T05:00:00.000Z",
+    "location": "Simsbury, CT",
+    "timeZone": "America/New_York"
+  },
+  {
+    "slug": "the-app-store-first-comes-power",
+    "isPublished": true,
+    "title": "First Comes Power",
+    "postedAt": "2009-01-03T05:00:00.000Z",
+    "location": "Ann Arbor, MI",
+    "timeZone": "America/New_York"
+  }
+]
