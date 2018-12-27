@@ -1,31 +1,31 @@
 <div class="post">
-  {{#if this.post}}
+  {{#if @post}}
     <div class="mb-4">
       <h1>
         {{#link-to
           "posts.show"
-          this.post.slug
+          @post.slug
           class="no-underline text-black border-b border-dashed border-grey"
         }}
-          {{this.post.title}}
+          {{@post.title}}
         {{/link-to}}
       </h1>
 
       <div class="text-xs">
         {{moment-format
-          this.post.postedAt
-          this.post.timeFormat
-          timeZone=this.post.timeZone
+          @post.postedAt
+          @post.timeFormat
+          timeZone=@post.timeZone
         }}
 
-        {{#if this.post.location}}
-          {{fa-icon "globe" class="ml-2"}} {{this.post.location}}
+        {{#if @post.location}}
+          {{fa-icon "globe" class="ml-2"}} {{@post.location}}
         {{/if}}
       </div>
     </div>
 
     <div class="text-lg">
-      {{markdown-to-html markdown=this.post.body}}
+      {{markdown-to-html markdown=@post.body}}
     </div>
   {{else}}
     Loading...
