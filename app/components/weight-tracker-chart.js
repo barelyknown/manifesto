@@ -30,16 +30,12 @@ export default Component.extend({
     'w-full'
   ],
 
-  init() {
-    this._super(...arguments);
+  didInsertElement() {
     this.loadDataTask.perform();
+    this.drawChartTask.perform();
     this.resizeService.on('debouncedDidResize', () => {
       this.drawChartTask.perform();
     });
-  },
-
-  didInsertElement() {
-    this.drawChartTask.perform();
   },
 
   fastboot: service(),
@@ -47,7 +43,7 @@ export default Component.extend({
   assetMap: service(),
 
   loadDataTask: task(function * () {
-    const url = 'assets/data/weight-measurements.csv';
+    const url = '/assets/data/weight-measurements.csv';
     const response = yield fetch(url);
     const csv = yield response.text();
     const parsed = Papa.parse(csv, { header: true, skipEmptyLines: true });
