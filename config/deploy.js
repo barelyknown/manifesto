@@ -6,6 +6,17 @@ module.exports = function(deployTarget) {
     build: {},
     pipeline: {
       activateOnDeploy: true,
+      disabled: {
+        's3-index': deployTarget === 'prerendered',
+      },
+      alias: {
+        s3: { as: ['s3', 's3-prember'] }
+      },
+      runOrder: {
+        's3-prember': {
+          after: 's3-index',
+        }
+      }
     },
   };
 
@@ -40,6 +51,14 @@ module.exports = function(deployTarget) {
       region: process.env.REGION,
       allowOverwrite: true,
     };
+
+    ENV['s3-prember'] = {
+      accessKeyId: process.env.ACCESS_KEY_ID,
+      secretAccessKey: process.env.SECRET_ACCESS_KEY,
+      bucket: process.env.INDEX_BUCKET,
+      region: process.env.REGION,
+      filePattern: '**/*.html',
+    }
   }
 
   return ENV;
