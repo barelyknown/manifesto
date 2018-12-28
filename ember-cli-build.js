@@ -6,7 +6,10 @@ const fs = require('fs');
 const path = require('path');
 
 async function buildUrls({ destDir, visit }) {
-  let urls = ['/'];
+  let urls = [
+    '/',
+    '/weight-vs-face',
+  ];
   const jsonPath = path.resolve('public','assets', 'posts', 'data.json');
   const data = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf-8' }));
 
