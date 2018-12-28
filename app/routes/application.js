@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
   postLoader: service(),
 
-  model() {
+  beforeModel() {
     return this.postLoader.loadAll();
   }
 });

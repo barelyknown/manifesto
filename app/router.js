@@ -11,7 +11,7 @@ const Router = EmberRouter.extend(RouterScroll, {
 
 Router.map(function() {
   this.route('posts', function() {
-    this.route('show', { path: '/:post_slug' }, function() {});
+    this.route('show', { path: '/:slug' }, function() {});
   });
   this.route('sidebar');
   this.route('weight-tracker');

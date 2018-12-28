@@ -2,17 +2,24 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const env = EmberApp.env();
+const fs = require('fs');
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
-      enabled: env === 'production',
+      enabled: true,
       extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md', 'csv', 'json'],
-      prepend: process.env.FINGERPRINT_PREPEND || '',
-      exclude: ['assets/images/posts/**/*.*'],
+      prepend: process.env.FINGERPRINT_PREPEND || '/',
+      exclude: ['assets/images/posts/**/*.*', 'package.json', 'assets/tests.js'],
       generateAssetMap: true,
       fingerprintAssetMap: true,
     },
+    prember: {
+      urls: [
+        '/',
+        '/posts/india-travelogue-2018-dispath-1',
+      ]
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated

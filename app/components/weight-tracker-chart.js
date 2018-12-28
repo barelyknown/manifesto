@@ -1,7 +1,8 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { task, waitForProperty, timeout } from 'ember-concurrency';
-import { csv } from 'd3-fetch';
+import fetch from 'fetch';
+import Papa from 'papaparse';
 import { select } from 'd3-selection';
 import { axisLeft, axisBottom } from 'd3-axis';
 import { scaleLinear, scaleTime } from 'd3-scale';
@@ -41,14 +42,19 @@ export default Component.extend({
     this.drawChartTask.perform();
   },
 
+  fastboot: service(),
+
   assetMap: service(),
 
   loadDataTask: task(function * () {
     const url = 'assets/data/weight-measurements.csv';
-    const data = (yield csv(url)).map((d) => {
+    const response = yield fetch(url);
+    const csv = yield response.text();
+    const parsed = Papa.parse(csv, { header: true, skipEmptyLines: true });
+    const data = parsed.data.map((d) => {
       return {
         date: moment(d.date, 'M/D/YYYY').toDate(),
-        weight: parseFloat(d.weight),
+        weight: Number(d.weight)
       };
     });
     this.set('data', data);

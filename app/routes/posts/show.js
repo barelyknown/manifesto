@@ -2,6 +2,9 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   model(params) {
-    return params.post_slug;
+    const { slug } = params;
+    return this.store.peekAll('post').find((p) => {
+      return p.slug === slug;
+    });
   },
 });

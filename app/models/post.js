@@ -1,21 +1,30 @@
 import DS from 'ember-data';
 import attr from 'ember-data/attr';
-import { text } from 'd3-fetch';
+import fetch from 'fetch';
 import { inject as service } from '@ember/service';
 import { computed } from 'ember-awesome-macros';
 import { task } from 'ember-concurrency';
 import moment from 'moment';
 
 export default DS.Model.extend({
-  init() {
-    this._super(...arguments);
-    this.loadBodyTask.perform();
-  },
-
   assetMap: service(),
 
+  fastboot: service(),
+
   loadBodyTask: task(function * () {
-    this.set('body', yield text(this.bodyURL));
+    let body;
+    if (this.fastboot.isFastBoot) {
+      const fs = FastBoot.require('fs');
+      const path = FastBoot.require('path');
+      const jsonPath = path.resolve('public','assets', 'posts', `${this.slug}.md`);
+      body = fs.readFileSync(jsonPath, { encoding: 'utf-8' });
+    } else {
+      const response = yield fetch(this.bodyURL);
+      if (response.status === 200) {
+        body = yield response.text();
+      }
+    }
+    this.set('body', body);
   }),
 
   bodyURL: computed('slug', function () {
