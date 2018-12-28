@@ -30,8 +30,12 @@ export default Component.extend({
     'w-full'
   ],
 
-  didInsertElement() {
+  init() {
+    this._super(...arguments);
     this.loadDataTask.perform();
+  },
+
+  didInsertElement() {
     this.drawChartTask.perform();
     this.resizeService.on('debouncedDidResize', () => {
       this.drawChartTask.perform();
@@ -43,9 +47,18 @@ export default Component.extend({
   assetMap: service(),
 
   loadDataTask: task(function * () {
-    const url = '/assets/data/weight-measurements.csv';
-    const response = yield fetch(url);
-    const csv = yield response.text();
+    let csv;
+    if (this.fastboot.isFastBoot) {
+      const fs = FastBoot.require('fs');
+      const path = FastBoot.require('path');
+      const jsonPath = path.resolve('public','assets', 'data', 'weight-measurements.csv');
+      csv = fs.readFileSync(jsonPath, { encoding: 'utf-8' });
+    } else {
+      const response = yield fetch('/assets/data/weight-measurements.csv');
+      if (response.status === 200) {
+        csv = yield response.text();
+      }
+    }
     const parsed = Papa.parse(csv, { header: true, skipEmptyLines: true });
     const data = parsed.data.map((d) => {
       return {
