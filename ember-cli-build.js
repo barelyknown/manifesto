@@ -3,6 +3,20 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const env = EmberApp.env();
 const fs = require('fs');
+const path = require('path');
+
+async function buildUrls({ destDir, visit }) {
+  let urls = ['/'];
+  const jsonPath = path.resolve('public','assets', 'posts', 'data.json');
+  const data = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf-8' }));
+
+  for (var d = 0; d < data.length; d++) {
+    const datum = data[d];
+    urls.push(`/posts/${datum.slug}`);
+  }
+
+  return urls;
+}
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
@@ -15,11 +29,8 @@ module.exports = function(defaults) {
       fingerprintAssetMap: true,
     },
     prember: {
-      urls: [
-        '/',
-        '/posts/india-travelogue-2018-dispath-1',
-      ]
-    }
+      urls: buildUrls,
+    },
   });
 
   // Use `app.import` to add additional libraries to the generated

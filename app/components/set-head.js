@@ -9,14 +9,12 @@ export default Component.extend({
 
   didReceiveAttrs() {
     const { title } = this;
-    console.log('didReceiveAttrs');
     run.once(() => {
       this.headData.set('title', title);
     });
   },
 
   willDestroyElement() {
-    console.log('willDestroyElement');;
     run.once(() => {
       this.headData.set('title', '');
     });
