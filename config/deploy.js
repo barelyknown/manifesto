@@ -34,6 +34,7 @@ module.exports = function(deployTarget) {
       accessKeyId: process.env.ACCESS_KEY_ID,
       secretAccessKey: process.env.SECRET_ACCESS_KEY,
       distribution: process.env.CLOUDFRONT_DISTRIBUTION_ID,
+      objectPaths: ['/*'],
     }
 
     ENV.s3 = {
