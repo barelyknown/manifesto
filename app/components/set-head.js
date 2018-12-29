@@ -11,13 +11,13 @@ export default Component.extend({
     const {
       headData,
       description,
-      image
+      imageUrl
     } = this;
 
     run.once(() => {
       headData.setProperties({
         description,
-        image,
+        imageUrl,
       });
     });
   },
@@ -27,7 +27,7 @@ export default Component.extend({
     run.once(() => {
       headData.setProperties({
         description: '',
-        image: '',
+        imageUrl: '',
       })
     });
   }

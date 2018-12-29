@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import attr from 'ember-data/attr';
 import fetch from 'fetch';
 import { inject as service } from '@ember/service';
-import { computed } from 'ember-awesome-macros';
+import { computed, or } from 'ember-awesome-macros';
 import { task } from 'ember-concurrency';
 import moment from 'moment';
 
@@ -48,6 +48,10 @@ export default DS.Model.extend({
   timeZone: attr('string'),
 
   image: attr('string'),
+
+  defaultImage: 'https://www-assets.barelyknown.com/assets/images/barelyknown-square-2014.png',
+
+  imageUrl: or('image', 'defaultImage'),
 
   timeFormat: computed('postedAt', 'timeZone', function () {
     const { postedAt, timeZone } = this;
