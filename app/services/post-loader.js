@@ -45,6 +45,7 @@ export default Service.extend({
               location: data[d].location,
               timeZone: data[d].timeZone,
               isPublished: data[d].isPublished,
+              image: data[d].image
             },
             relationships: {}
           };

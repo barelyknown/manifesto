@@ -47,6 +47,8 @@ export default DS.Model.extend({
 
   timeZone: attr('string'),
 
+  image: attr('string'),
+
   timeFormat: computed('postedAt', 'timeZone', function () {
     const { postedAt, timeZone } = this;
     if (moment(postedAt).clone().tz(timeZone).format('HH:mm') === '00:00') {

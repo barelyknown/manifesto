@@ -10,12 +10,14 @@ export default Component.extend({
   didReceiveAttrs() {
     const {
       headData,
-      description
+      description,
+      image
     } = this;
 
     run.once(() => {
       headData.setProperties({
         description,
+        image,
       });
     });
   },
@@ -25,6 +27,7 @@ export default Component.extend({
     run.once(() => {
       headData.setProperties({
         description: '',
+        image: '',
       })
     });
   }

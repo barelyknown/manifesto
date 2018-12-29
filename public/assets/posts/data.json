@@ -35,6 +35,16 @@
     "timeZone": "America/New_York"
   },
   {
+    "slug": "oh-the-bugs-youll-write",
+    "isPublished": true,
+    "title": "Oh the Bugs You'll Write",
+    "description": "Combo tribute to a favorite author and pastime.",
+    "postedAt": "2015-08-10T04:00:00.000Z",
+    "location": "Simsbury, CT",
+    "timeZone": "America/New_York",
+    "image": "/assets/images/posts/oh-the-bugs-youll-write/oh-the-bugs-youll-write.jpg"
+  },
+  {
     "slug": "gifts-of-blank-middle-names",
     "isPublished": true,
     "title": "Gifts of Blank Middle Names",
