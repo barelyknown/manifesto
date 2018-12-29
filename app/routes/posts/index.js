@@ -13,7 +13,7 @@ export default Route.extend({
     return (yield this.postLoader.loadAll()).filter((post) => {
       return post.isPublished;
     }).sort((a,b) => {
-      return a.publishedAt > b.publishedAt;
+      return a.postedAt > b.postedAt ? -1 : 1;
     });
   })
 });
