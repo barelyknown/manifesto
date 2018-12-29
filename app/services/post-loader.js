@@ -43,7 +43,8 @@ export default Service.extend({
               description: data[d].description,
               postedAt: data[d].postedAt,
               location: data[d].location,
-              timeZone: data[d].timeZone
+              timeZone: data[d].timeZone,
+              isPublished: data[d].isPublished,
             },
             relationships: {}
           };

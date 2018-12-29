@@ -9,6 +9,7 @@ async function buildUrls({ destDir, visit }) {
   let urls = [
     '/',
     '/weight-vs-face',
+    '/posts',
   ];
   const jsonPath = path.resolve('public','assets', 'posts', 'data.json');
   const data = JSON.parse(fs.readFileSync(jsonPath, { encoding: 'utf-8' }));

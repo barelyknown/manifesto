@@ -1,15 +1,4 @@
-<LinkList as |l|>
-  <div
-    class="bg-red rounded-lg inline-block text-white uppercase text-center leading-none p-1 mb-2"
-  >
-    <div class="text-xs font-extrabold">
-      AS SEEN ON
-    </div>
-    <div class="text-3xl font-extrabold">
-      LINE
-    </div>
-  </div>
-
+<LinkList @title="About Me" as |l|>
   <l.Item @href="https://www.twitter.com/barelyknown">
     {{fa-icon "twitter" prefix="fab" fixedWidth=true}}
     @barelyknown

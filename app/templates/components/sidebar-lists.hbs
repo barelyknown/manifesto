@@ -1,4 +1,20 @@
 <div class="ml-4 pl-4">
+  <LinkList @title="Projects" as |li|>
+    <li.Item>
+      {{#link-to "posts" class="text-sm no-underline text-black border-b border-dashed border-grey"}}
+        {{fa-icon "newspaper"}}
+        Posts
+      {{/link-to}}
+    </li.Item>
+
+    <li.Item>
+      {{#link-to "weight-vs-face" class="text-sm no-underline text-black border-b border-dashed border-grey"}}
+        {{fa-icon "weight"}}
+        Weight vs. Face
+      {{/link-to}}
+    </li.Item>
+  </LinkList>
+
   <AsSeenOnList />
 
   <LinkList @title="About the Site" as |ll|>
@@ -7,22 +23,12 @@
         <img src="/assets/images/ember-icon-black.svg" alt="ember" class="w-3 ml-1/2">
       </div>
 
-      Made with
-      <a href="" class="text-black no-underline border-b border-dashed border-grey">
-        Ember
-      </a>
+      Made with Ember
     </ll.Item>
 
     <ll.Item @href="https://github.com/barelyknown/manifesto">
       {{fa-icon "code"}}
       Open source
     </ll.Item>
-  </LinkList>
-
-  <LinkList @title="Projects">
-    {{#link-to "weight-vs-face" class="text-sm no-underline text-black border-b border-dashed border-grey"}}
-      {{fa-icon "weight"}}
-      Weight vs. Face
-    {{/link-to}}
   </LinkList>
 </div>

@@ -52,7 +52,6 @@
     "ember-cli-ifa": "barelyknown/ember-cli-ifa",
     "ember-cli-inject-live-reload": "^1.8.2",
     "ember-cli-moment-shim": "^3.7.1",
-    "ember-cli-sass": "^8.0.1",
     "ember-cli-showdown": "^4.4.4",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-tailwind": "^0.6.3",
@@ -76,8 +75,7 @@
     "papaparse": "^4.6.2",
     "prember": "^1.0.1",
     "prember-middleware": "^0.1.0",
-    "qunit-dom": "^0.8.0",
-    "sass": "^1.15.1"
+    "qunit-dom": "^0.8.0"
   },
   "fastbootDependencies": [
     "fs",

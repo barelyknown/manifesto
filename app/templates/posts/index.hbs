@@ -1,0 +1,36 @@
+<div class="flex">
+  <div class="md:w-3/4">
+    <h2 class="text-sm mb-2 text-grey-dark">
+      Posts
+    </h2>
+
+    <ul class="list-reset">
+      {{#each this.model as |post|}}
+        <li class="mb-6">
+          <div class="text-lg mb-1">
+            {{#link-to "posts.show" post.id class="link font-bold"}}
+              {{post.title}}
+            {{/link-to}}
+          </div>
+          <div class="text-xs text-grey mb-1">
+            {{moment-format
+              post.postedAt
+              post.timeFormat
+              timeZone=post.timeZone
+            }}
+          </div>
+
+          {{#with post.description as |description|}}
+            <p>
+              {{description}}
+            </p>
+          {{/with}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="hidden md:block md:w-1/4">
+    <SidebarLists />
+  </div>
+</div>
