@@ -3,6 +3,7 @@
     "slug": "india-travelogue-2018-dispath-1",
     "isPublished": true,
     "title": "India Travelogue: Dispatch 1",
+    "description": "Stories and photos from my first few days in India during December 2018.",
     "postedAt": "2018-12-13T03:30:00.000Z",
     "location": "Goa, India",
     "timeZone": "Asia/Kolkata"
@@ -19,6 +20,7 @@
     "slug": "manifesto-destiny",
     "isPublished": true,
     "title": "Manifesto Destiny",
+    "description": "A brief introduction to the manifesto, née blog, of Sean Devine.",
     "postedAt": "2018-11-25T18:00:00.000Z",
     "location": "Chicago, IL",
     "timeZone": "America/Chicago"
@@ -27,6 +29,7 @@
     "slug": "visions-and-verbs",
     "isPublished": true,
     "title": "Visions and Verbs",
+    "description": "A letter to my 20-year old daughter about the struggle to find purpose.",
     "postedAt": "2017-01-02T05:00:00.000Z",
     "location": "Simsbury, CT",
     "timeZone": "America/New_York"
@@ -35,6 +38,7 @@
     "slug": "the-app-store-first-comes-power",
     "isPublished": true,
     "title": "First Comes Power",
+    "description": "Analysis from the early days of the App Store about Apple's incentives regarding app pricing.",
     "postedAt": "2009-01-03T05:00:00.000Z",
     "location": "Ann Arbor, MI",
     "timeZone": "America/New_York"

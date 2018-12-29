@@ -35,6 +35,8 @@ export default DS.Model.extend({
 
   title: attr('string'),
 
+  description: attr('string'),
+
   postedAt: attr('date'),
 
   body: attr('string'),

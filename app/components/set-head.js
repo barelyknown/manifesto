@@ -8,15 +8,24 @@ export default Component.extend({
   headData: service(),
 
   didReceiveAttrs() {
-    const { title } = this;
+    const {
+      headData,
+      description
+    } = this;
+
     run.once(() => {
-      this.headData.set('title', title);
+      headData.setProperties({
+        description,
+      });
     });
   },
 
   willDestroyElement() {
+    const { headData } = this;
     run.once(() => {
-      this.headData.set('title', '');
+      headData.setProperties({
+        description: '',
+      })
     });
   }
 });

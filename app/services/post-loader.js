@@ -40,6 +40,7 @@ export default Service.extend({
             attributes: {
               slug: data[d].slug,
               title: data[d].title,
+              description: data[d].description,
               postedAt: data[d].postedAt,
               location: data[d].location,
               timeZone: data[d].timeZone
