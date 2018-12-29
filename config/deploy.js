@@ -15,6 +15,9 @@ module.exports = function(deployTarget) {
       runOrder: {
         's3-prember': {
           after: 's3-index',
+        },
+        'cloudfront': {
+          after: 's3-prember',
         }
       }
     },
