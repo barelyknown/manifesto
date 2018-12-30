@@ -2,7 +2,7 @@
   @apply mb-12 leading-normal;
 }
 
-.post p, .post ol {
+.post p, .post ol, .post pre {
   @apply mt-4;
 }
 

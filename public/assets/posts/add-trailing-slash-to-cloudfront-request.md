@@ -6,8 +6,7 @@ However, in order to prevent S3 from returning `302 Moved Temporarily` when Clou
 
 The following very simple Lambda function adds a trailing slash if the URI doesn't contain an extension or a trailing slash.
 
-<pre class="prettyprint p-2 text-sm text-white my-4 rounded">
-<code class="lang-js">const path = require('path')
+<pre class="prettyprint lang-js">const path = require('path')
 
 exports.handler = async (event) => {
   const { request } = event.Records[0].cf;
@@ -24,8 +23,7 @@ exports.handler = async (event) => {
   console.log(`Rewriting ${uri} to ${newUri}...`);
   request.uri = newUri;
   return request;
-};</code>
-</pre>
+};</pre>
 
 That's it! Trigger the Lambda function with a CloudFront viewer request event, and the request's URI will have the trailing slash added which S3 will handle without a redirect. That'll save 50ms (give or take) and be more search engine friendly.
 
