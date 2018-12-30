@@ -6,6 +6,10 @@
   @apply mt-4;
 }
 
+.post pre.prettyprint {
+  @apply p-2 text-sm text-white rounded whitespace-pre-wrap;
+}
+
 .post p a {
   @apply no-underline text-black border-b border-dashed border-grey;
 }
