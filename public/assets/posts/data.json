@@ -1,5 +1,13 @@
 [
   {
+    "slug": "add-trailing-slash-to-cloudfront-request",
+    "isPublished": true,
+    "title": "Add Trailing Slash to AWS CloudFront Request",
+    "description": "How to add a trailing slash to an AWS CloudFront request, helpful when deploying a prember-rendered static version of an Ember app via AWS CloudFront and S3.",
+    "postedAt": "2018-12-30T18:00:00.0000Z",
+    "timeZone": "America/Chicago"
+  },
+  {
     "slug": "the-paradox-of-indian-consumption",
     "isPublished": true,
     "title": "The Paradox of Indian Consumption",

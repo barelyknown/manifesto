@@ -24,6 +24,10 @@ module.exports = function(environment) {
 
     fastboot: {
       hostWhitelist: [/^localhost:\d+$/],
+    },
+
+    'ember-code-prettify': {
+      skin: 'desert',
     }
   };
 
