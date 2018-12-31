@@ -6,8 +6,8 @@
   @apply mt-4;
 }
 
-.post pre.prettyprint {
-  @apply p-2 text-sm text-white rounded whitespace-pre-wrap;
+.post pre {
+  @apply p-2 text-sm text-white rounded whitespace-pre-wrap !important;
 }
 
 .post p a {
