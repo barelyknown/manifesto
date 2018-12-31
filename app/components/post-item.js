@@ -7,6 +7,6 @@ export default Component.extend({
   codePrettify: service(),
 
   didRender() {
-    this.codePrettify.prettify();
+    // this.codePrettify.prettify();
   }
 });
