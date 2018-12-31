@@ -6,7 +6,7 @@ However, in order to prevent S3 from returning `302 Moved Temporarily` when Clou
 
 The following very simple Lambda function adds a trailing slash if the URI doesn't contain an extension or a trailing slash.
 
-<pre class="p-2 text-sm text-white rounded whitespace-pre-wrap bg-black">const path = require('path');
+<pre class="prettyprint lang-js p-2 text-sm text-white rounded whitespace-pre-wrap bg-black">const path = require('path');
 exports.handler = async (event) => {
   const { request } = event.Records[0].cf;
   const { uri } = request;
