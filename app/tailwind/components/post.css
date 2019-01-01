@@ -23,9 +23,9 @@
 }
 
 .post h1 {
-  @apply text-2xl;
+  @apply text-xl;
 }
 
 .post h2 {
-  @apply text-xl font-bold mt-4;
+  @apply text-lg font-bold mt-4;
 }

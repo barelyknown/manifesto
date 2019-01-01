@@ -16,6 +16,7 @@ Router.map(function() {
   this.route('sidebar');
   this.route('weight-tracker');
   this.route('weight-vs-face');
+  this.route('gross-domestic-product');
 });
 
 export default Router;

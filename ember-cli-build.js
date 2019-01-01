@@ -9,6 +9,7 @@ async function buildUrls({ destDir, visit }) {
   let urls = [
     '/',
     '/weight-vs-face',
+    '/gross-domestic-product',
     '/posts',
   ];
   const jsonPath = path.resolve('public','assets', 'posts', 'data.json');
