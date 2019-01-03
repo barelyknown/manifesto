@@ -24,9 +24,12 @@
       </div>
     </div>
 
-    <div class="text-base">
+    {{#if @post.isComponent}}
+      {{component @post.slug}}
+    {{else}}
       {{markdown-to-html markdown=@post.body}}
-    </div>
+    {{/if}}
+
   {{else}}
     Loading...
   {{/if}}

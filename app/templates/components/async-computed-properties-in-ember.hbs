@@ -1,0 +1,180 @@
+<div class="post">
+  <p>
+    <a href="https://guides.emberjs.com/release/object-model/computed-properties/">Computed properties</a> are flexible, efficient, and easy to understand. When I was first learning Ember, they reminded me of what I enjoyed so much about Excel - my first programming 🥰.
+  </p>
+
+  <p>...and then I met <a href="https://github.com/machty/ember-concurrency">ember-concurrency</a>.</p>
+
+  <p>
+    <img src="/assets/images/posts/async-computed-properties-in-ember/computed-properties-ember-concurrency-riding-motorcycles.jpg" />
+  </p>
+
+  <p>
+    I didn't want to choose between them (computed properties and ember concurrency) &mdash; I wanted to define computed properties with generator functions and have the backing ember-concurrency task built seamlessly.
+  </p>
+
+  <p>
+    Like this:
+  </p>
+
+  <pre class="prettyprint lang-js">// ✂️
+
+tempForecast: computedTask('selectedDate', function * () {
+  const {
+    date,
+    buildForecastUrl,
+  } = this;
+  const url = buildForecastUrl(date);
+  const response = yield fetch(url);
+  if (response.status === 200) {
+    const json = yield response.json();
+    return json['temperature'];
+  }
+})
+
+// ✂️</pre>
+
+  <div class="flex p-4 my-8 border border-grey rounded">
+    <div class="flex-1">
+      <div class="uppercase text-xxs mb-1">
+        Forecast Date
+      </div>
+      <div class="relative">
+        <select
+          onchange={{action "setDate" value="target.value"}}
+          class="appearance-none block w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        >
+          <option value="px-2">Select date</option>
+          {{#each this.dates as |date|}}
+            <option value={{date}} selected={{eq date this.selectedDate}}>
+              {{date}}
+            </option>
+          {{/each}}
+        </select>
+        <div class="pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker">
+          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="flex-1 text-right">
+      <div class="uppercase text-xxs mb-1">
+        Temperature
+      </div>
+      <div class="py-2">
+        {{#if this.tempForecastTask.isRunning}}
+          <div class="text-orange">
+            {{fa-icon "sun" spin=true}}
+          </div>
+        {{else}}
+          {{this.tempForecast}} <span class="text-grey">&#8457;</span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  <p>
+    With computed tasks, there are no promises to deal with in the template, and only a single computed task explicitly declared in the component.
+  </p>
+
+  <pre class="prettyprint">// ✂️
+
+\{{#if this.tempForecastTask.isRunning}}
+  \{{fa-icon "sun" spin=true}}
+\{{else}}
+  \{{this.tempForecast}} &lt;span class="text-grey"&gt;&amp;#8457;&lt;/span&gt;
+\{{/if}}
+
+// ✂️</pre>
+
+  <p>
+    How does it work? I added this function in my utils that builds the task and computed property.
+  </p>
+
+  <pre class="prettyprint lang-js">// manifesto/utils/computed-task.js
+
+import {
+  defineProperty
+} from '@ember/object';
+
+import {
+  task
+} from 'ember-concurrency';
+
+import ComputedProperty from '@ember/object/computed';
+import { expandProperties } from '@ember/object/computed';
+const _ComputedProperty = ComputedProperty;
+
+function parseArgs(args) {
+  return {
+    dependentKeys: args.slice(0, -1),
+    generatorFunction: args[args.length - 1],
+  };
+}
+
+const ComputedTaskProperty = function (...args) {
+  const { dependentKeys, generatorFunction } = parseArgs(args);
+  return _ComputedProperty.call(this, function(propertyName) {
+    const taskName = `${propertyName}Task`;
+    const isInitializedKeyName = `isComputedTaskInitialized-${propertyName}`;
+    const isInitialized = this.get(isInitializedKeyName);
+    const valueKeyName = `${taskName}.lastSuccessful.value`;
+    if (!isInitialized) {
+      defineProperty(this, taskName, task(generatorFunction).restartable());
+      this.addObserver(valueKeyName, () => {
+        this.notifyPropertyChange(propertyName);
+      });
+      this.get(taskName).perform();
+      const expandedKeys = [];
+      dependentKeys.forEach((dependentKey) => {
+        expandProperties(dependentKey, (property) => {
+          expandedKeys.push(property);
+        });
+      });
+      expandedKeys.forEach((expandedKey) => {
+        this.addObserver(expandedKey, () => {
+          this.get(taskName).perform();
+        });
+      });
+      this.set(isInitializedKeyName, true);
+    }
+
+    return this.get(valueKeyName);
+  });
+}
+
+ComputedTaskProperty.prototype = Object.create(ComputedProperty.prototype);
+
+export default function computedTask(...args) {
+  return new ComputedTaskProperty(...args);
+}</pre>
+
+  <p>
+    It's not perfect, but I've used it for a while in our applications, and its been <em>fine</em>&trade;.
+  </p>
+
+  <p>
+    A few final notes:
+  </p>
+
+  <ul class="mt-4">
+    <li class="mb-2">
+      <strong>Why didn't I release it as an add on?</strong><br>
+      Because I'm a lousy maintainer.
+    </li>
+
+    <li class="mb-2">
+      <strong>Why aren't there more options?</strong><br>
+      Because we haven't needed them.
+    </li>
+
+    <li class="mb-2">
+      <strong>Why do you have to "get" the computed task in init?</strong><br>
+      Because it's generated lazily and the task wouldn't have been created if I hadn't "gotten" it.
+    </li>
+
+    <li class="mb-2">
+      <strong>Should something like this be provided by ember-concurrency?</strong><br>
+      Maybe? I'd like it, but given that I'm haven't even released it as an add on, who am I to say.
+    </li>
+  </ul>
+</div>

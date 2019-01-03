@@ -11,8 +11,13 @@ export default DS.Model.extend({
 
   fastboot: service(),
 
+  isComponent: attr('boolean'),
+
   loadBodyTask: task(function * () {
+    if (this.isComponent) return;
+
     let body;
+
     if (this.fastboot.isFastBoot) {
       const fs = FastBoot.require('fs');
       const path = FastBoot.require('path');

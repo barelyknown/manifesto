@@ -1,5 +1,16 @@
 [
   {
+    "slug": "async-computed-properties-in-ember",
+    "isPublished": true,
+    "title": "Async Computed Properties in Ember",
+    "description": "How to combine the best of Ember's computed properties and ember-concurrency tasks.",
+    "postedAt": "2019-01-03T01:00:00Z",
+    "timeZone": "America/Chicago",
+    "location": "Chicago, IL",
+    "isComponent": true,
+    "image": "http://localhost:4200/assets/images/posts/async-computed-properties-in-ember/computed-properties-ember-concurrency-riding-motorcycles.jpg"
+  },
+  {
     "slug": "there-is-no-irony-in-india",
     "isPublished": true,
     "title": "There Is No Irony in India",
