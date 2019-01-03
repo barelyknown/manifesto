@@ -8,7 +8,7 @@
     "timeZone": "America/Chicago",
     "location": "Chicago, IL",
     "isComponent": true,
-    "image": "http://localhost:4200/assets/images/posts/async-computed-properties-in-ember/computed-properties-ember-concurrency-riding-motorcycles.jpg"
+    "image": "https://www-assets.barelyknown.com/assets/images/posts/async-computed-properties-in-ember/computed-properties-ember-concurrency-riding-motorcycles.jpg"
   },
   {
     "slug": "there-is-no-irony-in-india",
