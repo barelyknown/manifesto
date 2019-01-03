@@ -1,5 +1,5 @@
 .post {
-  @apply mb-12 leading-normal;
+  @apply mb-24 leading-normal;
 }
 
 .post p, .post ol, .post pre {
@@ -23,7 +23,7 @@
 }
 
 .post h1 {
-  @apply text-xl;
+  @apply text-xl font-light;
 }
 
 .post h2 {
