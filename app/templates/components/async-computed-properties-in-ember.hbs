@@ -34,28 +34,35 @@ tempForecast: computedTask('selectedDate', function * () {
 
 // ✂️</pre>
 
-  <div class="flex p-4 my-8 border border-grey rounded items-center">
-    <div class="flex-1">
-      <div class="uppercase text-xxs mb-1">
-        Forecast Date
+  <div class="p-4 my-8 border border-grey rounded">
+    <div class="flex mb-1">
+      <div class="flex-1">
+        <div class="uppercase text-xxs">
+          Forecast Date
+        </div>
       </div>
-      <select
-        onchange={{action "setDate" value="target.value"}}
-        class="w-full border h-8"
-      >
-        <option value="">Select date</option>
-        {{#each this.dates as |date|}}
-          <option value={{date}} selected={{eq date this.selectedDate}}>
-            {{date}}
-          </option>
-        {{/each}}
-      </select>
+      <div class="flex-1 text-right">
+        <div class="uppercase text-xxs">
+          Temperature
+        </div>
+      </div>
     </div>
-    <div class="flex-1 text-right">
-      <div class="uppercase text-xxs mb-1">
-        Temperature
+
+    <div class="flex items-center">
+      <div class="flex-1">
+        <select
+          onchange={{action "setDate" value="target.value"}}
+          class="w-full border h-8"
+        >
+          <option value="">Select date</option>
+          {{#each this.dates as |date|}}
+            <option value={{date}} selected={{eq date this.selectedDate}}>
+              {{date}}
+            </option>
+          {{/each}}
+        </select>
       </div>
-      <div class="">
+      <div class="flex-1 text-right">
         {{#if this.tempForecastTask.isRunning}}
           <div class="text-orange">
             {{fa-icon "sun" spin=true}}
