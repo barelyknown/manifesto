@@ -64,7 +64,10 @@ tempForecast: computedTask('selectedDate', function * () {
             {{fa-icon "sun" spin=true}}
           </div>
         {{else}}
-          {{this.tempForecast}}<span class="text-xs">&#8457;</span>
+          {{this.tempForecast}}
+          <span class="text-xs">
+            &#8457;
+          </span>
         {{/if}}
       </div>
     </div>
@@ -79,7 +82,10 @@ tempForecast: computedTask('selectedDate', function * () {
 \{{#if this.tempForecastTask.isRunning}}
   \{{fa-icon "sun" spin=true}}
 \{{else}}
-  \{{this.tempForecast}} &lt;span class="text-grey"&gt;&amp;#8457;&lt;/span&gt;
+  \{{this.tempForecast}}
+  &lt;span class="text-grey"&gt;
+    &amp;#8457;
+  &lt;/span&gt;
 \{{/if}}
 
 // ✂️</pre>
