@@ -1,5 +1,14 @@
 [
   {
+    "slug": "there-is-no-irony-in-india",
+    "isPublished": true,
+    "title": "There Is No Irony in India",
+    "description": "Observations on the lack of irony in Indian culture.",
+    "postedAt": "2019-01-02T02:30:00.0000Z",
+    "timeZone": "America/Chicago",
+    "location": "Chicago, IL"
+  },
+  {
     "slug": "add-trailing-slash-to-cloudfront-request",
     "isPublished": true,
     "title": "Add Trailing Slash to AWS CloudFront Request",
