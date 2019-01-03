@@ -35,16 +35,12 @@ tempForecast: computedTask('selectedDate', function * () {
 // ✂️</pre>
 
   <div class="p-4 my-8 border border-grey rounded">
-    <div class="flex mb-1">
+    <div class="flex mb-1 text-xs uppercase text-grey">
       <div class="flex-1">
-        <div class="uppercase text-xs">
-          Forecast Date
-        </div>
+        Forecast Date
       </div>
       <div class="flex-1 text-right">
-        <div class="uppercase text-xs">
-          Temperature
-        </div>
+        Temperature
       </div>
     </div>
 
@@ -68,7 +64,7 @@ tempForecast: computedTask('selectedDate', function * () {
             {{fa-icon "sun" spin=true}}
           </div>
         {{else}}
-          {{this.tempForecast}} <span class="text-grey">&#8457;</span>
+          {{this.tempForecast}}<span class="text-xs">&#8457;</span>
         {{/if}}
       </div>
     </div>
