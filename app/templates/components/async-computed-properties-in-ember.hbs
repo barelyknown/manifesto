@@ -17,7 +17,7 @@
     Like this:
   </p>
 
-  <pre class="prettyprint lang-js p-2 text-sm text-white rounded whitespace-pre-wrap bg-black">// ✂️
+  <pre class="prettyprint lang-js mt-4 p-2 text-sm text-white rounded whitespace-pre-wrap bg-black">// ✂️
 
 tempForecast: computedTask('selectedDate', function * () {
   const {
@@ -76,7 +76,7 @@ tempForecast: computedTask('selectedDate', function * () {
     With computed tasks, there are no promises to deal with in the template, and only a single computed task explicitly declared in the component.
   </p>
 
-  <pre class="prettyprint p-2 text-sm text-white rounded whitespace-pre-wrap bg-black">// ✂️
+  <pre class="prettyprint p-2 mt-4 text-sm text-white rounded whitespace-pre-wrap bg-black">// ✂️
 
 \{{#if this.tempForecastTask.isRunning}}
   \{{fa-icon "sun" spin=true}}
@@ -90,7 +90,7 @@ tempForecast: computedTask('selectedDate', function * () {
     How does it work? I added this function in my utils that builds the task and computed property.
   </p>
 
-  <pre class="prettyprint lang-js p-2 text-sm text-white rounded whitespace-pre-wrap bg-black">// manifesto/utils/computed-task.js
+  <pre class="prettyprint lang-js mt-4 p-2 text-sm text-white rounded whitespace-pre-wrap bg-black">// manifesto/utils/computed-task.js
 
 import {
   defineProperty
