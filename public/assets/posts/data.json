@@ -1,5 +1,15 @@
 [
   {
+    "slug": "on-your-16th-birthday",
+    "isPublished": true,
+    "title": "On Your 16th Birthday",
+    "description": "A short explanation of the gift that I give my kids on their 16th birthday.",
+    "postedAt": "2019-01-07T06:00:00Z",
+    "timeZone": "America/Chicago",
+    "location": "Chicago, IL",
+    "image": "https://www-assets.barelyknown.com/assets/images/posts/on-your-16th-birthday/16th-birthday-gift-bicycle.jpg"
+  },
+  {
     "slug": "async-computed-properties-in-ember",
     "isPublished": true,
     "title": "Async Computed Properties in Ember",
