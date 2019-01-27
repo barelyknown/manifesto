@@ -1,5 +1,14 @@
 [
   {
+    "slug": "pattern-for-hydrating-ember-routes-originally-rendered-via-fastboot",
+    "isPublished": true,
+    "title": "Pattern for Hydrating Ember Routes Originally Rendered Via FastBoot",
+    "description": "How to avoid showing the seam between a FastBoot rendered template and its hydrated version.",
+    "postedAt": "2019-01-26T06:00:00Z",
+    "timeZone": "America/Chicago",
+    "location": "Chicago, IL"
+  },
+  {
     "slug": "on-your-16th-birthday",
     "isPublished": true,
     "title": "On Your 16th Birthday",
