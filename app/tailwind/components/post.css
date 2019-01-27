@@ -1,13 +1,9 @@
 .post {
-  @apply mb-24 leading-normal;
+  @apply mb-12 leading-normal;
 }
 
 .post p, .post ol, .post pre {
   @apply mt-4;
-}
-
-.post pre {
-  @apply p-2 text-sm text-white rounded whitespace-pre-wrap bg-black;
 }
 
 .post p a {

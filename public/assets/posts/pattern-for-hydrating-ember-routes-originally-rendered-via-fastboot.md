@@ -102,9 +102,9 @@ export default Mixin.create({
   },
 
   afterModel() {
-    this._super(...arguments);
-
-    return this.afterModelTask.perform(...arguments);
+    const { _super, afterModelTask } = this;
+    _super(...arguments);
+    return afterModelTask.perform(...arguments);
   },
 
   afterModelTask: task(function * (model) {
