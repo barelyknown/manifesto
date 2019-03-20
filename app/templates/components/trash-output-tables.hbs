@@ -21,7 +21,7 @@
             {{format-number (mult 100 (div g.lbs totalLbs)) precision=0}}%
           </div>
           <div class="table-cell border border-{{this.borderColor}} p-{{this.cellPadding}} text-right">
-            {{g.lbs}}
+            {{format-number g.lbs precision=1}}
           </div>
         </div>
       {{/each}}
@@ -33,7 +33,7 @@
 
         </div>
         <div class="table-cell border border-{{this.borderColor}} p-{{this.cellPadding}} text-right">
-          {{this.totalLbs}}
+          {{format-number this.totalLbs precision=1}}
         </div>
       </div>
     {{else}}
@@ -73,7 +73,7 @@
             {{to.kind}}
           </div>
           <div class="table-cell border border-{{this.borderColor}} p-{{this.cellPadding}} text-right">
-            {{to.lbs}}
+            {{format-number to.lbs precision=1}}
           </div>
         </div>
       {{/each}}
@@ -85,7 +85,7 @@
 
         </div>
         <div class="table-cell border border-{{this.borderColor}} p-{{this.cellPadding}} text-right">
-          {{this.totalLbs}}
+          {{format-number this.totalLbs precision=1}}
         </div>
       </div>
     {{else}}
