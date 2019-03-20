@@ -7,76 +7,47 @@ import {
 } from 'ember-concurrency';
 
 import ComputedProperty from '@ember/object/computed';
-
-import {
-  expandProperties
-} from '@ember/object/computed';
-
-const _CP = ComputedProperty;
+import { expandProperties } from '@ember/object/computed';
 
 function parseArgs(args) {
   return {
-    dks: args.slice(0, -1),
-    gf: args[args.length - 1],
+    dependentKeys: args.slice(0, -1),
+    generatorFunction: args[args.length - 1],
   };
 }
 
-const ComputedTaskProperty = function (...args) {
-  const { dks, gf } = parseArgs(args);
-
-  return _CP.call(this, function(pn) {
-    const tn = `${pn}Task`;
-
-    const isInitKn = [
-      'isCtInit',
-      pn
-    ].join('-');
-
-    const isInit = this.get(isInitKn);
-
-    const vkn = [
-      tn,
-      'lastSuccessful',
-      'value'
-    ].join('.');
-
-    if (!isInit) {
-      defineProperty(
-        this,
-        tn,
-        task(gf).restartable()
-      );
-
-      this.addObserver(vkn, () => {
-        this.notifyPropertyChange(pn);
-      });
-
-      this.get(tn).perform();
-
-      const eks = [];
-
-      dks.forEach((dk) => {
-        expandProperties(dk, (p) => {
-          eks.push(p);
+class ComputedTaskProperty extends ComputedProperty {
+  constructor(...args) {
+    const { dependentKeys, generatorFunction } = parseArgs(args);
+    super(function(propertyName) {
+      const taskName = `${propertyName}Task`;
+      const isInitializedKeyName = `isComputedTaskInitialized-${propertyName}`;
+      const isInitialized = this.get(isInitializedKeyName);
+      const valueKeyName = `${taskName}.lastSuccessful.value`;
+      if (!isInitialized) {
+        defineProperty(this, taskName, task(generatorFunction).restartable());
+        this.addObserver(valueKeyName, () => {
+          this.notifyPropertyChange(propertyName);
         });
-      });
-
-      eks.forEach((ek) => {
-        this.addObserver(ek, () => {
-          this.get(tn).perform();
+        this.get(taskName).perform();
+        const expandedKeys = [];
+        dependentKeys.forEach((dependentKey) => {
+          expandProperties(dependentKey, (property) => {
+            expandedKeys.push(property);
+          });
         });
-      });
+        expandedKeys.forEach((expandedKey) => {
+          this.addObserver(expandedKey, () => {
+            this.get(taskName).perform();
+          });
+        });
+        this.set(isInitializedKeyName, true);
+      }
 
-      this.set(isInitKn, true);
-    }
-
-    return this.get(vkn);
-  });
+      return this.get(valueKeyName);
+    });
+  }
 }
-
-ComputedTaskProperty.prototype = Object.create(
-  ComputedProperty.prototype
-);
 
 export default function computedTask(...args) {
   return new ComputedTaskProperty(...args);
