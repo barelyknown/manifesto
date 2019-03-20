@@ -36,11 +36,13 @@ export default Component.extend({
         lbs: 0,
       });
     }
+
     for (let t = 0; t < trashOutput.length; t++) {
+      let entry = trashOutput[t];
       const group = groups.find((g) => {
-        return g.kind === trashOutput[t].kind;
+        return g.kind === entry.kind;
       });
-      group.lbs += trashOutput[t].lbs;
+      group.lbs += entry.lbs;
     }
     return groups.sort((a,b) => {
       return a.lbs > b.lbs ? -1 : 1;
