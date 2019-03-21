@@ -1,12 +1,12 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
+import { inject as service } from '@ember-decorators/service';
 
-export default Component.extend({
-  tagName: '',
+export default class PostItemComponent extends Component {
+  tagName = '';
 
-  codePrettify: service(),
+  @service codePrettify;
 
   didRender() {
     this.codePrettify.prettify();
   }
-});
+}
