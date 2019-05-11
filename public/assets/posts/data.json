@@ -1,5 +1,14 @@
 [
   {
+    "slug": "git-branch-name-from-github-issue-name-and-number",
+    "isPublished": true,
+    "title": "Git Branch Name From GitHub Issue Name And Number",
+    "description": "Simple Alfred workflow to create a sensible git branch name from a GitHub issue name and number.",
+    "postedAt": "2019-05-11T18:00:00.000Z",
+    "timeZone": "America/Chicago",
+    "location": "Chicago, IL"
+  },
+  {
     "slug": "takeaways-from-ember-conf-2019",
     "isPublished": true,
     "title": "Takeaways from EmberConf 2019",
