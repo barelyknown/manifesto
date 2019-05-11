@@ -25,3 +25,7 @@
 .post h2 {
   @apply text-lg font-bold mt-4;
 }
+
+.post blockquote {
+  @apply pl-4 border-l-2 text-grey-dark;
+}
