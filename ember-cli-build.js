@@ -27,9 +27,14 @@ module.exports = function(defaults) {
   let app = new EmberApp(defaults, {
     fingerprint: {
       enabled: true,
-      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md', 'csv', 'json'],
+      extensions: ['js', 'css', 'png', 'jpg', 'gif', 'map', 'svg', 'ico', 'eot', 'ttf', 'woff', 'woff2', 'md', 'csv', 'json', 'alfredworkflow'],
       prepend: process.env.FINGERPRINT_PREPEND || '/',
-      exclude: ['assets/images/posts/**/*.*', 'package.json', 'assets/tests.js'],
+      exclude: [
+        'assets/images/posts/**/*.*',
+        'package.json',
+        'assets/tests.js',
+        'assets/workflows/*.alfredworkflow',
+      ],
       generateAssetMap: true,
       fingerprintAssetMap: true,
     },
