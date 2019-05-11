@@ -9,7 +9,7 @@ becomes...
 
 `4045-first-material-transaction-in-incorrect`
 
-And so I made an [Alfred workflow (right-click to download)](/assets/workflows/git-branch-name-from-github-issue-name-and-number.alfredworkflow) that takes the GitHub issue name and number and creates a Git branch name that's usually good enough.
+And so I made an [Alfred workflow (right-click to download)](https://s3.amazonaws.com/www.barelyknown.com.assets/assets/workflows/git-branch-name-from-github-issue-name-and-number.alfredworkflow) that takes the GitHub issue name and number and creates a Git branch name that's usually good enough.
 
 Here's the good-enough JavaScript that does the conversion.
 
