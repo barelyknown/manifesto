@@ -18,6 +18,7 @@ Here's the good-enough JavaScript that does the conversion.
   const MAX_LENGTH = 50;
   const NUMBER_PATTERN = /\d+$/;
   const SUFFIX_PATTERN = /\s*#\d+$/;
+  const WORD_SEPARATOR_PATTERN = /[\s\(\)]+/g;
 
   let [query] = argv;
   let numberMatches = query.match(NUMBER_PATTERN);
@@ -25,7 +26,7 @@ Here's the good-enough JavaScript that does the conversion.
     let [number] = numberMatches;
 	let parts = [number];
     let name = query.replace(SUFFIX_PATTERN, '');
-    let words = name.split(/\s/g);
+    let words = name.split(WORD_SEPARATOR_PATTERN);
     parts.push(words.pop());
     while (words.length > 0) {
       let word = words.shift().toLowerCase();
@@ -38,3 +39,6 @@ Here's the good-enough JavaScript that does the conversion.
 	return parts.join(SEP);
   }
 }</pre>
+
+Updates:
+- v1.1 updated the `WORD_SEPARATOR_PATTERN` to remove additional characters
