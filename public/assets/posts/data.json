@@ -1,5 +1,14 @@
 [
   {
+    "slug": "on-balancing-the-tension-between-innovation-and-quality",
+    "isPublished": true,
+    "title": "On Balancing The Tension Between Innovation And Quality",
+    "description": "Memo originally written for internal company distribution regarding techniques for balancing the tension between innovation and quality.",
+    "postedAt": "2019-08-03T18:00:00.000Z",
+    "timeZone": "America/Chicago",
+    "location": "Chicago, IL"
+  },
+  {
     "slug": "git-branch-name-from-github-issue-name-and-number",
     "isPublished": true,
     "title": "Git Branch Name From GitHub Issue Name And Number",
