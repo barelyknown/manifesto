@@ -6,7 +6,7 @@
   @apply mt-4;
 }
 
-.post p a {
+.post p a, .post li a {
   @apply no-underline text-black border-b border-dashed border-grey;
 }
 
