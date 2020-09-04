@@ -81,7 +81,7 @@
     "ember-source": "~3.8.0",
     "eslint-plugin-ember": "^6.3.0",
     "loader.js": "^4.7.0",
-    "papaparse": "^4.6.3",
+    "papaparse": "^5.2.0",
     "prember": "^1.0.2",
     "prember-middleware": "^0.1.0",
     "qunit-dom": "^0.8.4"
